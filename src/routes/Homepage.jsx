@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";
+/* eslint-disable react/no-unescaped-entities */import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
 import { motion } from "framer-motion";
 function Homepage() {
@@ -102,6 +102,17 @@ function Homepage() {
 								Explore →
 							</a>
 						</motion.div>
+						<motion.p
+							initial={{ scale: 0 }}
+							animate={{ scale: 1 }}
+							transition={{
+								type: "spring",
+								stiffness: 150,
+								damping: 25,
+							}}
+							className="mt-4 text-gray-500">
+							<Link to={"/login"}>Caretaker Login</Link>
+						</motion.p>
 					</div>
 				</div>
 			</div>
