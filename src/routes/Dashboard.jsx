@@ -1,21 +1,25 @@
-import Map from "../components/Map";import DarkModeToggle from "../components/DarkModeToggle";
-import Result from "../components/dashboard/Result";
-
-function Dashboard() {
+import map from "../assets/map/sample.png";import { motion } from "framer-motion";function Dashboard() {
 	return (
 		<>
-			<div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white duration-300 h-full">
-				<main className="">
-					<DarkModeToggle />
-					<Map />
-					<h5 className="text-2xl font-bold leading-none text-gray-900 dark:text-white mt-12 ml-2">
-						Guipos <br /> Gasoline Station
-					</h5>
+			<div className="h-[1000px]">
+				<img
+					src={map}
+					alt=""
+				/>
 
-					<div className="p-2 mb-24">
-						<Result />
-					</div>
-				</main>
+				<motion.div
+					initial={{ y: "100vw" }}
+					animate={{ y: 0 }}
+					transition={{ type: "spring", stiffness: 50 }}
+					className="fixed top-[250px] rounded-t-3xl h-screen w-screen bg-white">
+					<motion.div
+						initial={{ y: "100vw" }}
+						animate={{ y: 0 }}
+						transition={{ type: "spring", stiffness: 50, delay:0.2 }}
+						className="text-gray-700 text-center my-4 text-xl font-semibold">
+						<p>Dolpo Cemetery</p>
+					</motion.div>
+				</motion.div>
 			</div>
 		</>
 	);

@@ -95,12 +95,12 @@ function Homepage() {
 								damping: 25,
 							}}
 							className="mt-5 flex items-center justify-center gap-x-6">
-							<a
-								href=""
+							<Link
+								to={'/dashboard'}
 								className="rounded-md bg-sky-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
 								rel="noreferrer">
 								Explore →
-							</a>
+							</Link>
 						</motion.div>
 						<motion.p
 							initial={{ scale: 0 }}

@@ -1,7 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";import { motion } from "framer-motion";
+/* eslint-disable react/no-unescaped-entities */ import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import RemoveRedEyeSharp from "@mui/icons-material/RemoveRedEyeSharp";
 function Login() {
 	return (
 		<>
@@ -25,8 +25,8 @@ function Login() {
 									<label className="text-gray-800 text-xs block mb-2">Mobile Number</label>
 									<div className="relative flex items-center">
 										<input
-											name="email"
-											type="text"
+											name="number"
+											type="number "
 											required
 											className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none"
 											placeholder="Enter Mobile Number"
@@ -49,7 +49,7 @@ function Login() {
 											className="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none"
 											placeholder="Enter password"
 										/>
-										<RemoveRedEyeSharp className="w-[18px] h-[18px] text-gray-400 absolute right-2" />
+										<VisibilityOffIcon className="w-[18px] h-[18px] text-gray-400 absolute right-2" />
 									</div>
 								</motion.div>
 
