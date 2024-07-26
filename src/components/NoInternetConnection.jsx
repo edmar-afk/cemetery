@@ -23,7 +23,7 @@ const NoInternetConnection = (props) => {
 	if (isOnline) {
 		return props.children;
 	} else {
-		return <h1 className="text-center text-red-800 mt-40 font-bold text-4xl">No Internet Connection. Please try again later.</h1>;
+		return <h1 className="text-center text-red-800 mt-40 font-bold text-sm">No Internet</h1>;
 	}
 };
 

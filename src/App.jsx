@@ -6,7 +6,6 @@ import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./routes/Dashboard";
 import { DarkModeProvider } from "./context/DarkModeContext";
-import NavBar from "./components/NavBar";
 import Login from "./routes/Login";
 function Logout() {
 	localStorage.clear();
