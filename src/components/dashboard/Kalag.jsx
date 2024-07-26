@@ -103,7 +103,7 @@ function Kalag({ name, dob, dod, address, age }) {
 					</nav>
 				</div>
 			</div>
-			<div className="mt-12"></div>
+			<div className="mt-4"></div>
 		</>
 	);
 }
