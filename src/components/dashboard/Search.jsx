@@ -1,9 +1,9 @@
-import { Box, IconButton, TextField } from "@mui/material";import SearchIcon from "@mui/icons-material/Search";
+import { Box, IconButton, TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 function Search({ searchToggle }) {
-    
 	useEffect(() => {
 		console.log("Toggle state from search bar:", searchToggle);
 	}, [searchToggle]);
