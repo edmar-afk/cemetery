@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 function Homepage() {
 	return (
 		<>
-			<div className="relative isolate overflow-hidden bg-gray-900 h-screen">
+			<div className="relative isolate overflow-hidden bg-gray-200 h-screen">
 				<svg
-					className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+					className="absolute inset-0 -z-10 h-full w-full stroke-white/40 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
 					aria-hidden="true">
 					<defs>
 						<pattern
@@ -56,7 +56,7 @@ function Homepage() {
 								stiffness: 150,
 								damping: 25,
 							}}
-							className="mt-10 text-4xl font-bold tracking-tight text-white">
+							className="mt-10 text-4xl font-bold tracking-tight text-gray-800">
 							<span>Welcome</span>
 							<span className="text-sky-500"> Margosatubig</span>
 							<span> Cemetery</span>
@@ -76,7 +76,7 @@ function Homepage() {
 							}}
 						/>
 						<motion.p
-							className="mt-6 text-lg leading-8 text-gray-300"
+							className="mt-6 text-lg leading-8 text-gray-800"
 							initial={{ x: "100vw" }}
 							animate={{ x: 0 }}
 							transition={{
@@ -110,7 +110,7 @@ function Homepage() {
 								stiffness: 150,
 								damping: 25,
 							}}
-							className="mt-4 text-gray-500">
+							className="mt-4 text-gray-400">
 							<Link to={"/login"}>Caretaker Login</Link>
 						</motion.p>
 					</div>
