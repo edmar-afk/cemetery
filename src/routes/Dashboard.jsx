@@ -1,4 +1,5 @@
-import map from "../assets/map/sample.png";import { motion } from "framer-motion";import Slots from "../components/dashboard/Slots";
+import map from "../assets/map/sample.png"; import { motion } from "framer-motion";
+import Slots from "../components/dashboard/Slots";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";

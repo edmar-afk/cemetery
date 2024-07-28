@@ -7,9 +7,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./routes/Dashboard";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import Login from "./routes/Login";
+import CaretakerDashboard from "./routes/CaretakerDashboard";
+
 function Logout() {
 	localStorage.clear();
-	return <Navigate to="/" />;
+	return <Navigate to="/login" />;
 }
 
 function RegisterAndLogout() {
@@ -26,7 +28,11 @@ function App() {
 						<Routes>
 							<Route
 								path="/home"
-								element={<ProtectedRoute></ProtectedRoute>}
+								element={
+									<ProtectedRoute>
+										<CaretakerDashboard />
+									</ProtectedRoute>
+								}
 							/>
 							<Route
 								path="/"
@@ -35,6 +41,10 @@ function App() {
 							<Route
 								path="/login"
 								element={<Login />}
+							/>
+							<Route
+								path="/logout"
+								element={<Logout />}
 							/>
 							<Route
 								path="/dashboard"
