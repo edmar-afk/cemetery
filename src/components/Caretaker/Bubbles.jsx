@@ -18,9 +18,9 @@ function Bubbles() {
 				animate={{ scale: 1 }}
 				transition={{ type: "spring", stiffness: 150, bounce: 0.5 }}
 				className={`${
-					isActive("/home") ? "bg-blue-500 text-white" : "bg-white text-blue-500"
+					isActive("/upper") ? "bg-blue-500 text-white" : "bg-white text-blue-500"
 				} rounded-full py-1.5 px-3 shadow-xl z-50 cursor-pointer`}
-				onClick={() => handleLinkClick("/home")}>
+				onClick={() => handleLinkClick("/upper")}>
 				<span className="text-xs m-1">Upper Cemetery</span>
 			</motion.div>
 			<motion.div
@@ -38,9 +38,9 @@ function Bubbles() {
 				animate={{ scale: 1 }}
 				transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.4 }}
 				className={`${
-					isActive("/home") ? "bg-blue-500 text-white" : "bg-white text-blue-500"
+					isActive("/lower") ? "bg-blue-500 text-white" : "bg-white text-blue-500"
 				} rounded-full py-2 px-3 shadow-xl z-50 cursor-pointer`}
-				onClick={() => handleLinkClick("/home")}>
+				onClick={() => handleLinkClick("/lower")}>
 				<span className="text-xs">Lower Cemetery</span>
 			</motion.div>
 		</div>
