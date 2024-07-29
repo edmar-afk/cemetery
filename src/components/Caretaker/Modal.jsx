@@ -1,5 +1,4 @@
-import * as React from "react";
-import Button from "@mui/joy/Button";
+import * as React from "react";import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
@@ -15,7 +14,7 @@ export default function BasicModalDialog({ modalIsOpen, handleClose }) {
 				open={modalIsOpen}
 				onClose={handleClose}>
 				<ModalDialog>
-					<DialogTitle>Add Kalag</DialogTitle>
+					<DialogTitle>Add Kalag in Center Cemetery</DialogTitle>
 					<DialogContent>Fill in the information of the person.</DialogContent>
 					<form
 						onSubmit={(event) => {
@@ -67,7 +66,13 @@ export default function BasicModalDialog({ modalIsOpen, handleClose }) {
 									"& .MuiOutlinedInput-root": {},
 								}}
 							/>
-							<Button type="submit"><AddCircleOutlinedIcon fontSize="small" className="mr-1"/> Add</Button>
+							<Button type="submit">
+								<AddCircleOutlinedIcon
+									fontSize="small"
+									className="mr-1"
+								/>{" "}
+								Add
+							</Button>
 						</Stack>
 					</form>
 				</ModalDialog>
