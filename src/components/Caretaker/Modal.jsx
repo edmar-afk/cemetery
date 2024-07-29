@@ -1,49 +1,70 @@
-import * as React from "react";
-import Button from "@mui/joy/Button";
-import FormControl from "@mui/joy/FormControl";
-import FormLabel from "@mui/joy/FormLabel";
-import Input from "@mui/joy/Input";
+import * as React from "react";import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
-import Add from "@mui/icons-material/Add";
-
-export default function BasicModalDialog() {
-	const [open, setOpen] = React.useState(false);
+import {TextField} from "@mui/material";
+// eslint-disable-next-line react/prop-types
+export default function BasicModalDialog({ modalIsOpen, handleClose }) {
 	return (
 		<React.Fragment>
-			<Button
-				variant="outlined"
-				color="neutral"
-				startDecorator={<Add />}
-				onClick={() => setOpen(true)}>
-				New project
-			</Button>
 			<Modal
-				open={open}
-				onClose={() => setOpen(false)}>
+				open={modalIsOpen}
+				onClose={handleClose}>
 				<ModalDialog>
-					<DialogTitle>Create new project</DialogTitle>
-					<DialogContent>Fill in the information of the project.</DialogContent>
+					<DialogTitle>Add Kalag</DialogTitle>
+					<DialogContent>Fill in the information of the person.</DialogContent>
 					<form
 						onSubmit={(event) => {
 							event.preventDefault();
-							setOpen(false);
+							handleClose(); // Close the modal on form submission
 						}}>
 						<Stack spacing={2}>
-							<FormControl>
-								<FormLabel>Name</FormLabel>
-								<Input
-									autoFocus
-									required
-								/>
-							</FormControl>
-							<FormControl>
-								<FormLabel>Description</FormLabel>
-								<Input required />
-							</FormControl>
+							<TextField
+								id="name"
+								className="text"
+								label="Person Name"
+								variant="outlined"
+								size="small"
+								sx={{
+									margin: "10px auto",
+									"& .MuiOutlinedInput-root": {},
+								}}
+							/>
+							<TextField
+								id="dob"
+								className="text"
+								label="Date of Birth"
+								variant="outlined"
+								size="small"
+								sx={{
+									margin: "10px auto",
+									"& .MuiOutlinedInput-root": {},
+								}}
+							/>
+							<TextField
+								id="dod"
+								className="text"
+								label="Date Died"
+								variant="outlined"
+								size="small"
+								sx={{
+									margin: "10px auto",
+									"& .MuiOutlinedInput-root": {},
+								}}
+							/>
+							<TextField
+								id="address"
+								className="text"
+								label="Person Address"
+								variant="outlined"
+								size="small"
+								sx={{
+									margin: "10px auto",
+									"& .MuiOutlinedInput-root": {},
+								}}
+							/>
 							<Button type="submit">Submit</Button>
 						</Stack>
 					</form>
