@@ -26,7 +26,7 @@ function Dashboard() {
 					initial={{ y: "100vw" }}
 					animate={{ y: 0 }}
 					transition={{ type: "spring", stiffness: 50 }}
-					className="fixed top-[320px] rounded-t-3xl h-screen w-screen bg-gray-200 overflow-y-auto">
+					className="fixed top-[380px] rounded-t-3xl h-screen w-screen bg-gray-200 overflow-y-auto">
 					<div className="sticky top-0 pt-1 pb-2 bg-gray-200 z-50">
 						<motion.div
 							initial={{ y: "100vw" }}

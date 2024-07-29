@@ -10,8 +10,8 @@ function Search({ searchToggle }) {
 	return (
 		<div className="relative p">
 			<div
-				className={`fixed top-4 bg-white ${
-					searchToggle ? "top-0" : "-top-40"
+				className={`fixed top-14 bg-white ${
+					searchToggle ? "top-0" : "-top-56"
 				} w-screen h-[60px] rounded-full flex justify-center transition-all duration-300`}>
 				<Box
 					className="App"
