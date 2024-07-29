@@ -1,12 +1,11 @@
-import map from "../assets/map/sample.png";
-import { motion } from "framer-motion";
-import Slots from "../components/dashboard/Slots";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import map from "../assets/map/sample.png";import { motion } from "framer-motion";import Slots from "../components/dashboard/Slots";import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";
 import Search from "../components/dashboard/Search";
 import { useEffect, useState } from "react";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { Link } from "react-router-dom";
+
 function Dashboard() {
 	const [searchToggle, setSearchToggle] = useState(false);
 
@@ -54,10 +53,18 @@ function Dashboard() {
 						<div>
 							<p>Avaiable Slots: 4</p>
 						</div>
-						<div
-							onClick={() => setSearchToggle(!searchToggle)}
-							className="flex justify-end text-blue-800 hover:cursor-pointer">
-							<SearchOutlinedIcon fontSize="medium"/>
+						<div className="flex items-center">
+							<div
+								onClick={() => setSearchToggle(!searchToggle)}
+								className="flex justify-end text-blue-800 hover:cursor-pointer">
+								<SearchOutlinedIcon fontSize="medium" />
+							</div>
+							<Link to={"/"}>
+								<HomeOutlinedIcon
+									fontSize="medium"
+									className="text-cyan-900 ml-2 mb-0.5"
+								/>
+							</Link>
 						</div>
 					</div>
 					<Kalag />
