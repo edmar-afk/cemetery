@@ -1,10 +1,12 @@
-import map from "../assets/map/sample.png"; import { motion } from "framer-motion";
+import map from "../assets/map/sample.png";
+import { motion } from "framer-motion";
 import Slots from "../components/dashboard/Slots";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";
 import Search from "../components/dashboard/Search";
 import { useEffect, useState } from "react";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 function Dashboard() {
 	const [searchToggle, setSearchToggle] = useState(false);
 
@@ -54,8 +56,8 @@ function Dashboard() {
 						</div>
 						<div
 							onClick={() => setSearchToggle(!searchToggle)}
-							className="flex justify-end text-gray-800 hover:cursor-pointer">
-							Search kalag
+							className="flex justify-end text-blue-800 hover:cursor-pointer">
+							<SearchOutlinedIcon fontSize="medium"/>
 						</div>
 					</div>
 					<Kalag />
