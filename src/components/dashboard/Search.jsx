@@ -6,7 +6,10 @@ function Search({ searchToggle }) {
 	useEffect(() => {
 		console.log("Toggle state from search bar:", searchToggle);
 	}, [searchToggle]);
-
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		// Add your search logic here
+	};
 	return (
 		<div className="relative p">
 			<div
@@ -22,7 +25,9 @@ function Search({ searchToggle }) {
 						flexDirection: "column",
 						justifyContent: "space-evenly",
 					}}>
-					<form style={{ display: "flex", alignItems: "center" }}>
+					<form
+						onSubmit={handleSubmit}
+						style={{ display: "flex", alignItems: "center" }}>
 						<TextField
 							id="search-bar"
 							className="text rounded-full"
@@ -38,7 +43,9 @@ function Search({ searchToggle }) {
 								},
 							}}
 						/>
-						<IconButton aria-label="search">
+						<IconButton
+							type="submit"
+							aria-label="search">
 							<SearchIcon style={{ fill: "blue" }} />
 						</IconButton>
 					</form>
