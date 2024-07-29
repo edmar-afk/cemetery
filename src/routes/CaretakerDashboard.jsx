@@ -8,7 +8,7 @@ function CaretakerDashboard() {
 	// console.log(userData);
 	return (
 		<>
-			<div className="bg-blue-600 h-[450px] -mt-4">
+			<div className="bg-blue-600 h-[450px] pt-12">
 				<Time />
 				<NavBar />
 
