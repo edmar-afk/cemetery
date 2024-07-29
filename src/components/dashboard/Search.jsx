@@ -1,5 +1,4 @@
-import { Box, IconButton, TextField } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Box, IconButton, TextField } from "@mui/material";import SearchIcon from "@mui/icons-material/Search";
 import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
@@ -9,15 +8,15 @@ function Search({ searchToggle }) {
 	}, [searchToggle]);
 
 	return (
-		<div className="relative">
+		<div className="relative p">
 			<div
-				className={`fixed bg-white ${
-					searchToggle ? "top-0" : "-top-20"
-				} w-screen h-[60px] rounded-b-2xl flex justify-center transition-all duration-300`}>
+				className={`fixed top-4 bg-white ${
+					searchToggle ? "top-0" : "-top-40"
+				} w-screen h-[60px] rounded-full flex justify-center transition-all duration-300`}>
 				<Box
 					className="App"
 					sx={{
-						width: 330,
+						width: 350,
 						height: 0,
 						display: "flex",
 						flexDirection: "column",
@@ -39,9 +38,7 @@ function Search({ searchToggle }) {
 								},
 							}}
 						/>
-						<IconButton
-							type="submit"
-							aria-label="search">
+						<IconButton aria-label="search">
 							<SearchIcon style={{ fill: "blue" }} />
 						</IconButton>
 					</form>
