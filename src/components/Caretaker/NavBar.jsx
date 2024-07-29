@@ -4,7 +4,7 @@ function NavBar() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	return (
 		<>
-			<div className="my-4 pt-12 mx-5 text-white relative">
+			<div className="my-4 pt-4 mx-5 text-white relative">
 				<div className="flex flex-row items-center justify-between">
 					<div className="flex flex-col z-50">
 						<motion.p

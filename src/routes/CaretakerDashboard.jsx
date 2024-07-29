@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import NavBar from "../components/Caretaker/NavBar";
+import { Link } from "react-router-dom";import NavBar from "../components/Caretaker/NavBar";
 import Bubbles from "../components/Caretaker/Bubbles";
 import Time from "../components/Caretaker/Time";
 import Kalag from "../components/dashboard/Kalag";
@@ -10,19 +9,23 @@ function CaretakerDashboard() {
 	return (
 		<>
 			<div className="bg-blue-600 h-[450px] -mt-4">
+				<Time />
 				<NavBar />
 
-				<Time />
 				<Bubbles />
 
-				<div className="bg-white mx-2 rounded-t-3xl mt-4">
+				<div className="bg-white mx-2 rounded-t-3xl shadow-2xl h-full mt-4">
 					<div className="flex flex-row justify-between p-4 mx-2">
 						<p className="">Center Cemetery</p>
-						<p><AddCircleOutlineOutlinedIcon fontSize="medium" className="text-blue-600"/></p>
+						<p>
+							<AddCircleOutlineOutlinedIcon
+								fontSize="medium"
+								className="text-blue-600"
+							/>
+						</p>
 					</div>
 					<Kalag />
 				</div>
-				<Link to={"/logout"}>Logout</Link>
 			</div>
 		</>
 	);

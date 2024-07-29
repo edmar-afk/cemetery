@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import React from "react";
 import NoInterConnection from "./components/NoInternetConnection";
 import Homepage from "./routes/Homepage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -16,7 +17,7 @@ function Logout() {
 
 function RegisterAndLogout() {
 	localStorage.clear();
-	return;
+	return null;
 }
 
 function App() {
@@ -26,14 +27,6 @@ function App() {
 				<DarkModeProvider>
 					<BrowserRouter>
 						<Routes>
-							<Route
-								path="/home"
-								element={
-									<ProtectedRoute>
-										<CaretakerDashboard />
-									</ProtectedRoute>
-								}
-							/>
 							<Route
 								path="/"
 								element={<Homepage />}
@@ -48,11 +41,19 @@ function App() {
 							/>
 							<Route
 								path="/dashboard"
+								element={<Dashboard />}
+							/>
+							<Route
+								path="/home"
 								element={
-									<>
-										<Dashboard />
-									</>
+									<ProtectedRoute>
+										<CaretakerDashboard />
+									</ProtectedRoute>
 								}
+							/>
+							<Route
+								path="*"
+								element={<NotFound />}
 							/>
 						</Routes>
 					</BrowserRouter>
