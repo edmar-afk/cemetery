@@ -1,10 +1,12 @@
-import * as React from "react";import Button from "@mui/joy/Button";
+import * as React from "react";
+import Button from "@mui/joy/Button";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
-import {TextField} from "@mui/material";
+import { TextField } from "@mui/material";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 // eslint-disable-next-line react/prop-types
 export default function BasicModalDialog({ modalIsOpen, handleClose }) {
 	return (
@@ -65,7 +67,7 @@ export default function BasicModalDialog({ modalIsOpen, handleClose }) {
 									"& .MuiOutlinedInput-root": {},
 								}}
 							/>
-							<Button type="submit">Submit</Button>
+							<Button type="submit"><AddCircleOutlinedIcon fontSize="small" className="mr-1"/> Add</Button>
 						</Stack>
 					</form>
 				</ModalDialog>
