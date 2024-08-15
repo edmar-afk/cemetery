@@ -1,22 +1,31 @@
-/* eslint-disable no-unused-vars */
-import map from "../assets/map/sample.png";
+import { useState } from "react";import map from "../assets/map/sample.png";
 import { motion } from "framer-motion";
-import Slots from "../components/dashboard/Slots";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";
 import Search from "../components/dashboard/Search";
-import { useEffect, useState } from "react";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
 
 function Dashboard() {
 	const [searchToggle, setSearchToggle] = useState(false);
+	const [currentSection, setCurrentSection] = useState("Upper Cemetery");
 
-	useEffect(() => {
-		console.log("Toggle state:", searchToggle);
-	}, [searchToggle]);
+	const sections = ["Upper Cemetery", "Center Cemetery", "Lower Cemetery"];
+
+	const handleNextSection = () => {
+		const currentIndex = sections.indexOf(currentSection);
+		const nextIndex = (currentIndex + 1) % sections.length;
+		setCurrentSection(sections[nextIndex]);
+	};
+
+	const handlePreviousSection = () => {
+		const currentIndex = sections.indexOf(currentSection);
+		const previousIndex = (currentIndex - 1 + sections.length) % sections.length;
+		setCurrentSection(sections[previousIndex]);
+	};
+
 	return (
 		<>
 			<Search searchToggle={searchToggle} />
@@ -27,26 +36,27 @@ function Dashboard() {
 					alt=""
 					draggable="false"
 				/>
-
 				<div className="fixed top-[380px] rounded-t-3xl h-screen w-screen bg-gray-200 overflow-y-auto">
 					<div className="sticky top-0 pt-1 pb-2 bg-gray-200 z-50">
-						<div className=" text-gray-700 text-center my-4 text-xl font-semibold flex flex-row justify-between mx-8">
+						<div className="text-gray-700 text-center my-4 text-xl font-semibold flex flex-row justify-between mx-8">
 							<motion.div
 								initial={{ scale: 0 }}
 								animate={{ scale: 1 }}
-								transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0 }}>
+								transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0 }}
+								onClick={handlePreviousSection}>
 								<ArrowCircleLeftIcon />
 							</motion.div>
 							<motion.p
 								initial={{ scale: 0 }}
 								animate={{ scale: 1 }}
 								transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.1 }}>
-								Upper Cemetery
+								{currentSection}
 							</motion.p>
 							<motion.div
 								initial={{ scale: 0 }}
 								animate={{ scale: 1 }}
-								transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.2 }}>
+								transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.2 }}
+								onClick={handleNextSection}>
 								<ArrowCircleRightIcon />
 							</motion.div>
 						</div>
@@ -56,7 +66,7 @@ function Dashboard() {
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
 							transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.2 }}>
-							<p>Avaiable Slots: 4</p>
+							<p>Available Slots: 4</p>
 						</motion.div>
 						<div className="flex items-center">
 							<motion.div
@@ -80,7 +90,10 @@ function Dashboard() {
 							</motion.div>
 						</div>
 					</div>
-					<Kalag isAdmin={false} />
+					<Kalag
+						isAdmin={false}
+						cemetery_section={currentSection}
+					/>
 				</div>
 			</div>
 		</>
