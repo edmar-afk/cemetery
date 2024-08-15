@@ -1,20 +1,18 @@
-import * as React from "react";import Button from "@mui/joy/Button";
-import Modal from "@mui/joy/Modal";
-import ModalDialog from "@mui/joy/ModalDialog";
+import * as React from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
 import { TextField } from "@mui/material";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 // eslint-disable-next-line react/prop-types
-export default function PlotModal({ modalIsOpen, handleClose }) {
+export default function PlotModal({ modalIsOpen, handleClose, section }) {
 	return (
 		<React.Fragment>
 			<Modal
 				open={modalIsOpen}
 				onClose={handleClose}>
 				<ModalDialog>
-					<DialogTitle>Available Plots in Center Cemetery</DialogTitle>
+					<DialogTitle sx={{ fontSize: "1rem" }}>Available Plots in {section}</DialogTitle>
 					<DialogContent>Fill in the number of available Plots.</DialogContent>
 					<form
 						onSubmit={(event) => {
@@ -33,7 +31,7 @@ export default function PlotModal({ modalIsOpen, handleClose }) {
 									"& .MuiOutlinedInput-root": {},
 								}}
 							/>
-							
+
 							<Button type="submit">
 								<AddCircleOutlinedIcon
 									fontSize="small"

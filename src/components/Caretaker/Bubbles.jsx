@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";import { useNavigate, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Bubbles() {
 	const navigate = useNavigate();

@@ -9,6 +9,8 @@ import Dashboard from "./routes/Dashboard";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import Login from "./routes/Login";
 import CaretakerDashboard from "./routes/CaretakerDashboard";
+import UpperCemetery from "./components/Caretaker/UpperCemetery";
+import LowerCemetery from "./components/Caretaker/LowerCemetery";
 
 function Logout() {
 	localStorage.clear();
@@ -44,10 +46,26 @@ function App() {
 								element={<Dashboard />}
 							/>
 							<Route
+								path="/upper"
+								element={
+									<ProtectedRoute>
+										<UpperCemetery />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
 								path="/home"
 								element={
 									<ProtectedRoute>
 										<CaretakerDashboard />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/lower"
+								element={
+									<ProtectedRoute>
+										<LowerCemetery />
 									</ProtectedRoute>
 								}
 							/>

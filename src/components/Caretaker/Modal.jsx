@@ -7,14 +7,14 @@ import Stack from "@mui/joy/Stack";
 import { TextField } from "@mui/material";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 // eslint-disable-next-line react/prop-types
-export default function BasicModalDialog({ modalIsOpen, handleClose }) {
+export default function BasicModalDialog({ modalIsOpen, handleClose, section }) {
 	return (
 		<React.Fragment>
 			<Modal
 				open={modalIsOpen}
 				onClose={handleClose}>
 				<ModalDialog>
-					<DialogTitle>Add Kalag in Center Cemetery</DialogTitle>
+					<DialogTitle>Add Kalag in {section}</DialogTitle>
 					<DialogContent>Fill in the information of the person.</DialogContent>
 					<form
 						onSubmit={(event) => {
