@@ -5,10 +5,9 @@ import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
 import { TextField } from "@mui/material";
-import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import api from "../../assets/api";
 import Swal from "sweetalert2";
-
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 // eslint-disable-next-line react/prop-types
 export default function PlotModal({ modalIsOpen, handleClose, section, sectionAPI, onSuccess }) {
 	const [number, setNumber] = useState("");
@@ -68,11 +67,11 @@ export default function PlotModal({ modalIsOpen, handleClose, section, sectionAP
 								sx={{ margin: "10px auto" }}
 							/>
 							<Button type="submit">
-								<AddCircleOutlinedIcon
+								<BorderColorOutlinedIcon
 									fontSize="small"
 									className="mr-1"
 								/>
-								Add
+								Update
 							</Button>
 						</Stack>
 					</form>

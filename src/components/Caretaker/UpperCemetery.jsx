@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";import api from "../../assets/api";import NavBar from "./NavBar";
+import { useState, useEffect } from "react";
+import api from "../../assets/api";
+import NavBar from "./NavBar";
 import Bubbles from "./Bubbles";
 import Time from "./Time";
 import Kalag from "../dashboard/Kalag";
@@ -6,8 +8,10 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import BasicModalDialog from "./Modal";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import PlotModal from "./PlotModal";
-
+import { Tooltip } from "react-tooltip";
 function UpperCemetery() {
+	const [kalagCount, setKalagCount] = useState(0);
+
 	const [modalState, setModalState] = useState({
 		basicModalOpen: false,
 		plotModalOpen: false,
@@ -38,7 +42,6 @@ function UpperCemetery() {
 
 	const handlePlotSubmissionSuccess = () => {
 		fetchPlots(); // Re-fetch plots to update the latest plot
-		
 	};
 
 	return (
@@ -47,7 +50,6 @@ function UpperCemetery() {
 				modalIsOpen={modalState.basicModalOpen}
 				section="Upper Cemetery"
 				handleClose={() => toggleModal("basicModalOpen")}
-				
 			/>
 			<PlotModal
 				modalIsOpen={modalState.plotModalOpen}
@@ -77,16 +79,24 @@ function UpperCemetery() {
 						</div>
 					</div>
 					{latestPlot ? (
-						<div className="ml-6 -mt-2 text-xs">
-							<LayersOutlinedIcon fontSize="small" />
-							Available Plot: <span className="font-bold">{latestPlot.number}</span>
+						<div className="ml-6 -mt-2 text-sm w-fit flex">
+							<div
+								data-tooltip-id="my-tooltip"
+								data-tooltip-content={`${latestPlot.number} available Plots subtract to ${kalagCount} kalags`}
+								data-tooltip-place="bottom">
+								<LayersOutlinedIcon fontSize="small" />
+								Available Plot: <span className="font-bold">{latestPlot.number - kalagCount}</span>
+							</div>
+							<Tooltip id="my-tooltip" />
 						</div>
 					) : (
 						<div className="ml-6 -mt-2 text-xs">No plots available</div>
 					)}
+
 					<Kalag
 						isAdmin={true}
 						cemetery_section="Upper Cemetery"
+						setKalagCount={setKalagCount}
 					/>
 				</div>
 			</div>

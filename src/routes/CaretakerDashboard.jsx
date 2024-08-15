@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";import api from "../assets/api";
+import { useState, useEffect } from "react";
+import api from "../assets/api";
 import NavBar from "../components/Caretaker/NavBar";
 import Bubbles from "../components/Caretaker/Bubbles";
 import Time from "../components/Caretaker/Time";
@@ -7,8 +8,9 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import BasicModalDialog from "../components/Caretaker/Modal";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import PlotModal from "../components/Caretaker/PlotModal";
-
+import { Tooltip } from "react-tooltip";
 function CaretakerDashboard() {
+	const [kalagCount, setKalagCount] = useState(0);
 	const [modalState, setModalState] = useState({
 		basicModalOpen: false,
 		plotModalOpen: false,
@@ -76,9 +78,15 @@ function CaretakerDashboard() {
 						</div>
 					</div>
 					{latestPlot ? (
-						<div className="ml-6 -mt-2 text-xs">
-							<LayersOutlinedIcon fontSize="small" />
-							Available Plot: <span className="font-bold">{latestPlot.number}</span>
+						<div className="ml-6 -mt-2 text-sm w-fit flex">
+							<div
+								data-tooltip-id="my-tooltip"
+								data-tooltip-content={`${latestPlot.number} available Plots subtract to ${kalagCount} kalags`}
+								data-tooltip-place="bottom">
+								<LayersOutlinedIcon fontSize="small" />
+								Available Plot: <span className="font-bold">{latestPlot.number - kalagCount}</span>
+							</div>
+							<Tooltip id="my-tooltip" />
 						</div>
 					) : (
 						<div className="ml-6 -mt-2 text-xs">No plots available</div>
@@ -86,6 +94,7 @@ function CaretakerDashboard() {
 					<Kalag
 						isAdmin={true}
 						cemetery_section="Center Cemetery"
+						setKalagCount={setKalagCount}
 					/>
 				</div>
 			</div>

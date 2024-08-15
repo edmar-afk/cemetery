@@ -1,24 +1,26 @@
-/* eslint-disable react/prop-types */ import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import api from "../../assets/api";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import api from "../../assets/api";
 
-function Kalag({ cemetery_section, isAdmin }) {
+// eslint-disable-next-line react/prop-types
+function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 	const [kalagData, setKalagData] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [isRefreshing, setIsRefreshing] = useState(false); // State for tracking refresh status
 
 	const fetchKalagData = async () => {
-		setLoading(true); // Start loading indicator
+		setIsRefreshing(true); // Set to "Refreshing..." when clicked
 		try {
 			const response = await api.get(`/api/kalag/?cemetery_section=${cemetery_section}`);
 			setKalagData(response.data);
+			setKalagCount(response.data.length); // Update the parent with the count
 		} catch (error) {
 			console.error("Error fetching Kalag data:", error);
 		} finally {
-			setLoading(false); // End loading indicator
+			setIsRefreshing(false); // Set back to "Refresh" when done
 		}
 	};
 
@@ -27,7 +29,7 @@ function Kalag({ cemetery_section, isAdmin }) {
 	}, [cemetery_section]);
 
 	const refreshData = () => {
-		fetchKalagData(); // Refresh data
+		fetchKalagData();
 	};
 
 	const handleDelete = async (id) => {
@@ -48,14 +50,14 @@ function Kalag({ cemetery_section, isAdmin }) {
 			<div className="text-gray-800 h-full overflow-y-scroll">
 				<div className="relative flex flex-col text-gray-700 rounded-xl bg-clip-border">
 					<nav className="flex flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
-						<div
-							onClick={refreshData}
-							className="flex justify-end cursor-pointer items-center text-xs mr-4 py-3">
-							<RefreshIcon
-								fontSize="small"
-								className="mr-1"
-							/>
-							{loading ? "Refreshing..." : "Refresh"}
+						<div className="flex justify-end items-center text-xs mr-4 py-3 cursor-pointer">
+							<div onClick={refreshData}>
+								<RefreshIcon
+									fontSize="small"
+									className="mr-1"
+								/>
+								{isRefreshing ? "Refreshing..." : "Refresh"} {/* Toggle text based on refreshing state */}
+							</div>
 						</div>
 						{kalagData.map((kalag) => (
 							<div
