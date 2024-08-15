@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import api from "../assets/api";
+import { useState, useEffect } from "react";import api from "../assets/api";
 import NavBar from "../components/Caretaker/NavBar";
 import Bubbles from "../components/Caretaker/Bubbles";
 import Time from "../components/Caretaker/Time";
@@ -81,7 +80,7 @@ function CaretakerDashboard() {
 						<div className="ml-6 -mt-2 text-sm w-fit flex">
 							<div
 								data-tooltip-id="my-tooltip"
-								data-tooltip-content={`${latestPlot.number} available Plots subtract to ${kalagCount} kalags`}
+								data-tooltip-content={`${latestPlot.number} total Plots subtract to ${kalagCount} kalags`}
 								data-tooltip-place="bottom">
 								<LayersOutlinedIcon fontSize="small" />
 								Available Plot: <span className="font-bold">{latestPlot.number - kalagCount}</span>
