@@ -1,4 +1,5 @@
-import { useState } from "react";import map from "../assets/map/sample.png";
+import { useState, useEffect } from "react";
+import map from "../assets/map/sample.png";
 import { motion } from "framer-motion";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
@@ -7,11 +8,14 @@ import Search from "../components/dashboard/Search";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
+import api from "../assets/api";
+import { Tooltip } from "react-tooltip";
 
 function Dashboard() {
 	const [searchToggle, setSearchToggle] = useState(false);
 	const [currentSection, setCurrentSection] = useState("Upper Cemetery");
-
+	const [kalagCount, setKalagCount] = useState(0);
+	const [latestPlot, setLatestPlot] = useState(null);
 	const sections = ["Upper Cemetery", "Center Cemetery", "Lower Cemetery"];
 
 	const handleNextSection = () => {
@@ -25,6 +29,22 @@ function Dashboard() {
 		const previousIndex = (currentIndex - 1 + sections.length) % sections.length;
 		setCurrentSection(sections[previousIndex]);
 	};
+
+	const fetchPlots = async () => {
+		try {
+			const response = await api.get("/api/plots-list/", {
+				params: { cemetery_section: "Upper Cemetery" },
+			});
+			console.log(latestPlot);
+			setLatestPlot(response.data[0] || null); // Update with the latest plot
+		} catch (error) {
+			console.error("Error fetching plots:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchPlots();
+	}, []);
 
 	return (
 		<>
@@ -65,8 +85,14 @@ function Dashboard() {
 						<motion.div
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
-							transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.2 }}>
-							<p>Available Slots: 4</p>
+							transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.2 }}
+							data-tooltip-id="my-tooltip"
+							data-tooltip-content={
+								latestPlot ? `${latestPlot.number} total Plots subtract to ${kalagCount} kalags` : "No data available"
+							}
+							data-tooltip-place="bottom">
+							<p>Available Slots: {latestPlot ? latestPlot.number - kalagCount : "N/A"}</p>
+							<Tooltip id="my-tooltip" />
 						</motion.div>
 						<div className="flex items-center">
 							<motion.div
@@ -93,6 +119,7 @@ function Dashboard() {
 					<Kalag
 						isAdmin={false}
 						cemetery_section={currentSection}
+						setKalagCount={setKalagCount}
 					/>
 				</div>
 			</div>
