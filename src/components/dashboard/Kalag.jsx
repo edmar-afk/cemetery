@@ -5,6 +5,8 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import api from "../../assets/api";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import SearchKalag from "./SearchKalag";
 
 // eslint-disable-next-line react/prop-types
 function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
@@ -26,6 +28,7 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 
 	useEffect(() => {
 		fetchKalagData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cemetery_section]);
 
 	const refreshData = () => {
@@ -51,6 +54,7 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 				<div className="relative flex flex-col text-gray-700 rounded-xl bg-clip-border">
 					<nav className="flex flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
 						<div className="flex justify-end items-center text-xs mr-4 py-3 cursor-pointer">
+							{isAdmin && <SearchKalag />}
 							<div onClick={refreshData}>
 								<RefreshIcon
 									fontSize="small"
@@ -82,6 +86,10 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 										<p className="text-ellipsis text-[10px]">{kalag.address}</p>
 										{isAdmin && (
 											<div className="mr-1 flex items-center">
+												<RemoveRedEyeOutlinedIcon
+													fontSize="medium"
+													className="bg-green-600 rounded-full p-1 text-white mr-1"
+												/>
 												<EditOutlinedIcon
 													fontSize="medium"
 													className="bg-blue-700 rounded-full p-1 text-white"

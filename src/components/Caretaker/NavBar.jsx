@@ -1,10 +1,12 @@
 import Person3OutlinedIcon from "@mui/icons-material/Person3Outlined";
 import { motion } from "framer-motion";
+import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
+import { Link } from "react-router-dom";
 function NavBar() {
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	return (
 		<>
-			<div className="my-4 pt-4 mx-5 text-white relative">
+			<div className="pt-4 mx-5 text-white relative">
 				<div className="flex flex-row items-center justify-between">
 					<div className="flex flex-col z-50">
 						<motion.p
@@ -30,6 +32,13 @@ function NavBar() {
 						<Person3OutlinedIcon fontSize="large" />
 					</motion.div>
 				</div>
+
+				<Link to={'/masterlist'} className="pt-8 -mb-8 flex justify-end">
+					<div className="flex flex-col items-center">
+						<InventoryRoundedIcon />
+						<p className="text-[10px]">Masterlist</p>
+					</div>
+				</Link>
 			</div>
 		</>
 	);

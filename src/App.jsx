@@ -11,18 +11,52 @@ import Login from "./routes/Login";
 import CaretakerDashboard from "./routes/CaretakerDashboard";
 import UpperCemetery from "./components/Caretaker/UpperCemetery";
 import LowerCemetery from "./components/Caretaker/LowerCemetery";
+import { useEffect } from "react";
+import MasterList from "./components/masterlist/MasterList";
 
 function Logout() {
 	localStorage.clear();
-	return <Navigate to="/login" />;
+	return <Navigate to="/" />;
 }
 
 function RegisterAndLogout() {
 	localStorage.clear();
-	return null;
+	return;
 }
 
+const disableZoom = () => {
+	// Disable zoom on mouse wheel
+	window.addEventListener(
+		"wheel",
+		(e) => {
+			if (e.ctrlKey) {
+				e.preventDefault();
+			}
+		},
+		{ passive: false }
+	);
+
+	// Disable zoom on keydown (Ctrl + '+' or '-' or '0')
+	window.addEventListener("keydown", (e) => {
+		if (
+			(e.ctrlKey && (e.key === "+" || e.key === "-" || e.key === "0")) ||
+			(e.key === "Meta" && (e.key === "+" || e.key === "-" || e.key === "0"))
+		) {
+			e.preventDefault();
+		}
+	});
+};
+
 function App() {
+	useEffect(() => {
+		disableZoom();
+
+		return () => {
+			// Cleanup event listeners on unmount
+			window.removeEventListener("wheel", disableZoom);
+			window.removeEventListener("keydown", disableZoom);
+		};
+	}, []);
 	return (
 		<>
 			<NoInterConnection>
@@ -66,6 +100,14 @@ function App() {
 								element={
 									<ProtectedRoute>
 										<LowerCemetery />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/masterlist"
+								element={
+									<ProtectedRoute>
+										<MasterList />
 									</ProtectedRoute>
 								}
 							/>

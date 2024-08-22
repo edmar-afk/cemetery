@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";import api from "../assets/api";
-import NavBar from "../components/Caretaker/NavBar";
+import { useState, useEffect } from "react";import api from "../assets/api";import NavBar from "../components/Caretaker/NavBar";
 import Bubbles from "../components/Caretaker/Bubbles";
 import Time from "../components/Caretaker/Time";
 import Kalag from "../components/dashboard/Kalag";
@@ -85,7 +84,10 @@ function CaretakerDashboard() {
 								<LayersOutlinedIcon fontSize="small" />
 								Available Plot: <span className="font-bold">{latestPlot.number - kalagCount}</span>
 							</div>
-							<Tooltip id="my-tooltip" />
+							<Tooltip
+								id="my-tooltip"
+								style={{ zIndex: 9999 }}
+							/>
 						</div>
 					) : (
 						<div className="ml-6 -mt-2 text-xs">No plots available</div>
