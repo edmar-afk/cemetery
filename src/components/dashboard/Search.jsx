@@ -12,7 +12,7 @@ function Search({ searchToggle }) {
 		// Add your search logic here
 	};
 	return (
-		<div className="relative p">
+		<div className="relative z-[999]">
 			<div
 				className={`fixed top-14 bg-white ${
 					searchToggle ? "scale-100" : "scale-0"

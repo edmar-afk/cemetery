@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import map from "../assets/map/sample.png";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";import { motion } from "framer-motion";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";
@@ -10,6 +8,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
 import api from "../assets/api";
 import { Tooltip } from "react-tooltip";
+import Map from "../components/dashboard/Map";
 
 function Dashboard() {
 	const [searchToggle, setSearchToggle] = useState(false);
@@ -44,19 +43,21 @@ function Dashboard() {
 
 	useEffect(() => {
 		fetchPlots();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
 		<>
 			<Search searchToggle={searchToggle} />
-			<div className="h-[800px] bg-gray-950">
-				<img
-					src={map}
-					className=""
-					alt=""
-					draggable="false"
-				/>
-				<div className="fixed top-[380px] rounded-t-3xl h-screen w-screen bg-gray-200 overflow-y-auto">
+			<div className="h-screen bg-white">
+				{/* Map component with horizontal scrolling */}
+				<div className="overflow-x-auto">
+					<Map />
+				</div>
+
+				{/* Fixed container that scrolls vertically */}
+				<div className="fixed top-[330px] rounded-t-3xl h-screen w-screen bg-gray-200 overflow-y-auto z-[9999]">
+					{/* Header with sticky behavior */}
 					<div className="sticky top-0 pt-1 pb-2 bg-gray-200 z-50">
 						<div className="text-gray-700 text-center my-4 text-xl font-semibold flex flex-row justify-between mx-8">
 							<motion.div
@@ -81,6 +82,8 @@ function Dashboard() {
 							</motion.div>
 						</div>
 					</div>
+
+					{/* Content below the sticky header */}
 					<div className="text-gray-800 flex flex-row justify-between mx-4 my-4 pt-4">
 						<motion.div
 							initial={{ scale: 0 }}
@@ -116,6 +119,8 @@ function Dashboard() {
 							</motion.div>
 						</div>
 					</div>
+
+					{/* Kalag component */}
 					<Kalag
 						isAdmin={false}
 						cemetery_section={currentSection}
