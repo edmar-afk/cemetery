@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";import { motion } from "framer-motion";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import { useState, useEffect } from "react";import { motion } from "framer-motion";import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";
 import Search from "../components/dashboard/Search";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -52,7 +50,7 @@ function Dashboard() {
 			<div className="h-screen bg-white">
 				{/* Map component with horizontal scrolling */}
 				<div className="overflow-x-auto">
-					<Map />
+					<Map cemeterySection={currentSection} />
 				</div>
 
 				{/* Fixed container that scrolls vertically */}
