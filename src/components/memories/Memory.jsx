@@ -1,15 +1,14 @@
-import ImageIcon from "@mui/icons-material/Image";
-
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/no-unescaped-entities */
+import ImageIcon from "@mui/icons-material/Image"; // eslint-disable-next-line react/prop-types
 function Memory({ name }) {
 	return (
 		<>
 			{" "}
 			<p className="text-left text-sm ml-4 mt-2 font-bold">Memories of our beloved {name}</p>
 			<div className="bg-white rounded-t-3xl shadow-lg p-4">
-				<p>
-					text text text text text text text texttext text text texttext text text texttext text text text
-					text text text text text text text text text text text text text text text text text text text text
+				<p className="italic text-gray-500">
+					"Available in Capstone 2 Available in Capstone 2 Available in Capstone 2 Available in Capstone 2 Available in
+					Capstone 2 Available in Capstone 2 Available in Capstone 2 Available in Capstone 2"
 				</p>
 
 				<div className="pt-6">
