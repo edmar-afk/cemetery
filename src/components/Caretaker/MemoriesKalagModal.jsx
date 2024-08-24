@@ -1,4 +1,5 @@
-import * as React from "react";import { useState } from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";import ModalDialog from "@mui/joy/ModalDialog";
+import * as React from "react";import { useState } from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";
+import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
@@ -144,8 +145,6 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 								onChange={(e) => setRelativeAddress(e.target.value)}
 								sx={{ margin: "10px auto" }}
 							/>
-
-							<p className="font-bold text-sm mb-0 mt-6">Relative Relationship</p>
 							<Select
 								labelId="relativeRelation-label"
 								id="relativeRelation"

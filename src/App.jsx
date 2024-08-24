@@ -13,6 +13,7 @@ import UpperCemetery from "./components/Caretaker/UpperCemetery";
 import LowerCemetery from "./components/Caretaker/LowerCemetery";
 import { useEffect } from "react";
 import MasterList from "./components/masterlist/MasterList";
+import Memories from "./components/memories/Memories";
 
 function Logout() {
 	localStorage.clear();
@@ -110,6 +111,10 @@ function App() {
 										<MasterList />
 									</ProtectedRoute>
 								}
+							/>
+							<Route
+								path="/memories/:kalagId/"
+								element={<Memories />}
 							/>
 							<Route
 								path="*"

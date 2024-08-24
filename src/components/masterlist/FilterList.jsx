@@ -1,5 +1,4 @@
-import { useState } from "react";import { motion } from "framer-motion";
-import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
+import { useState } from "react";import { motion } from "framer-motion";import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
 
 function FilterList() {
@@ -7,11 +6,11 @@ function FilterList() {
 	const [selectedFilter, setSelectedFilter] = useState("name");
 
 	const handleSortClick = () => {
-		setSelectedFilter("name"); // Set the selected filter to name
+		setSelectedFilter("Name"); // Set the selected filter to name
 	};
 
 	const handleAddCardClick = () => {
-		setSelectedFilter("balance"); // Set the selected filter to balance
+		setSelectedFilter("Payment Status"); // Set the selected filter to balance
 	};
 
 	const iconAnimation = (delay) => ({
@@ -25,20 +24,22 @@ function FilterList() {
 			<div className="flex flex-row items-center justify-between">
 				<p className="text-xs">
 					Filtered by:
-					{selectedFilter === "name" && " Name"}
-					{selectedFilter === "balance" && " Balance"}
+					{selectedFilter === "Name" && " Name"}
+					{selectedFilter === "Payment Status" && " Payment Status"}
 				</p>
 				<div className="flex flex-row">
 					<motion.div {...iconAnimation(0)}>
 						<SortOutlinedIcon
 							onClick={handleSortClick}
-							className={`${selectedFilter === "name" ? "bg-blue-500 p-0.5 mr-3 rounded text-white shadow-xl" : ""}`}
+							className={`${selectedFilter === "Name" ? "bg-blue-500 p-0.5 mr-3 rounded text-white shadow-xl" : ""}`}
 						/>
 					</motion.div>
 					<motion.div {...iconAnimation(0.3)}>
 						<AddCardOutlinedIcon
 							onClick={handleAddCardClick}
-							className={`${selectedFilter === "balance" ? "bg-blue-500 p-0.5 ml-3 rounded text-white shadow-xl" : ""}`}
+							className={`${
+								selectedFilter === "Payment Status" ? "bg-blue-500 p-0.5 ml-3 rounded text-white shadow-xl" : ""
+							}`}
 						/>
 					</motion.div>
 				</div>

@@ -1,17 +1,24 @@
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { useEffect, useState } from "react";import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";import { faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";import EditOutlinedIcon from "@mui/icons-material/EditOutlined";import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import api from "../../assets/api";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import SearchKalag from "./SearchKalag";
-
+import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
+import EditKalagModal from "../Caretaker/EditKalagModal";
+import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 	const [kalagData, setKalagData] = useState([]);
 	const [isRefreshing, setIsRefreshing] = useState(false); // State for tracking refresh status
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+	const handleEditClick = () => {
+		setIsEditModalOpen(true);
+	};
+
+	const handleEditModalClose = () => {
+		setIsEditModalOpen(false);
+	};
 
 	const fetchKalagData = async () => {
 		setIsRefreshing(true); // Set to "Refreshing..." when clicked
@@ -58,49 +65,74 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 							<div onClick={refreshData}>
 								<RefreshIcon
 									fontSize="small"
-									className="mr-1"
+									className="mr-1 ml-2"
 								/>
-								{isRefreshing ? "Refreshing..." : "Refresh"} {/* Toggle text based on refreshing state */}
+								{isRefreshing ? "Refreshing..." : "Refresh"}
 							</div>
 						</div>
 						{kalagData.map((kalag) => (
 							<div
 								key={kalag.id}
 								className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-								<div className="grid mr-4 place-items-center">
+								<Link
+									to={`/memories/${kalag.id}`}
+									className="grid mr-4 place-items-center">
 									<FontAwesomeIcon
 										icon={faSkullCrossbones}
 										className="relative inline-block h-6 w-6 !rounded-full object-cover object-center"
 									/>
-								</div>
+								</Link>
 								<div className="flex flex-col w-full">
-									<div className="flex flex-row justify-between items-center">
+									<Link
+										to={`/memories/${kalag.id}`}
+										className="flex flex-row justify-between items-center">
 										<h6 className="block font-sans text-xs antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
 											{kalag.name}
 										</h6>
 										<p className="text-[10px]">
 											{kalag.date_born} - {kalag.date_died}
 										</p>
-									</div>
+									</Link>
 									<div className="flex flex-row justify-between items-center">
-										<p className="text-ellipsis text-[10px]">{kalag.address}</p>
-										{isAdmin && (
-											<div className="mr-1 flex items-center">
-												<RemoveRedEyeOutlinedIcon
-													fontSize="medium"
-													className="bg-green-600 rounded-full p-1 text-white mr-1"
-												/>
-												<EditOutlinedIcon
-													fontSize="medium"
-													className="bg-blue-700 rounded-full p-1 text-white"
-												/>
-												<DeleteOutlinedIcon
-													fontSize="medium"
-													className="bg-red-700 rounded-full p-1 text-white ml-1"
-													onClick={() => handleDelete(kalag.id)}
-												/>
-											</div>
-										)}
+										<Link
+											to={`/memories/${kalag.id}`}
+											className="text-ellipsis text-[10px]">
+											{kalag.address}
+										</Link>
+										<div className="mr-1 flex items-center">
+											<PsychologyAltIcon
+												fontSize="medium"
+												className="bg-cyan-600 rounded-full p-1 text-white mr-1"
+											/>
+											{isAdmin && (
+												<>
+													<Link to={`/memories/${kalag.id}`}>
+														<RemoveRedEyeOutlinedIcon
+															fontSize="medium"
+															className="bg-green-600 rounded-full p-1 text-white mr-1"
+														/>
+													</Link>
+
+													<EditOutlinedIcon
+														fontSize="medium"
+														className="bg-blue-700 rounded-full p-1 text-white"
+														onClick={handleEditClick}
+													/>
+													<EditKalagModal
+														modalIsOpen={isEditModalOpen}
+														handleClose={handleEditModalClose}
+														kalagid={kalag.id}
+														kalagname={kalag.name}
+														section={cemetery_section}
+													/>
+													<DeleteOutlinedIcon
+														fontSize="medium"
+														className="bg-red-700 rounded-full p-1 text-white ml-1"
+														onClick={() => handleDelete(kalag.id)}
+													/>
+												</>
+											)}
+										</div>
 									</div>
 								</div>
 							</div>

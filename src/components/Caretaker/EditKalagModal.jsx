@@ -1,14 +1,18 @@
-import * as React from "react";import { useState } from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";import ModalDialog from "@mui/joy/ModalDialog";
+import * as React from "react";
+import { useState, useEffect } from "react";
+import Button from "@mui/joy/Button";
+import Modal from "@mui/joy/Modal";
+import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
 import { TextField, CircularProgress, Select, MenuItem } from "@mui/material";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
-import api from "../../assets/api";
 import CancelTwoToneIcon from "@mui/icons-material/CancelTwoTone";
+import api from "../../assets/api";
 
 // eslint-disable-next-line react/prop-types
-export default function BasicModalDialog({ modalIsOpen, handleClose, section }) {
+export default function EditKalagModal({ modalIsOpen, handleClose, section, kalagid, kalagname }) {
 	const [name, setName] = useState("");
 	const [dateBorn, setDateBorn] = useState("");
 	const [dateDied, setDateDied] = useState("");
@@ -19,6 +23,29 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 	const [relativeAddress, setRelativeAddress] = useState("");
 	const [relativeRelation, setRelativeRelation] = useState("Parent");
 	const [isLoading, setIsLoading] = useState(false);
+
+	// Fetch existing Kalag data when modal is opened
+	useEffect(() => {
+		if (modalIsOpen && kalagid) {
+			setIsLoading(true);
+			api
+				.get(`/api/kalags/${kalagid}/`)
+				.then((response) => {
+					const kalag = response.data;
+					setName(kalag.name);
+					setDateBorn(kalag.date_born);
+					setDateDied(kalag.date_died);
+					setAddress(kalag.address);
+					setGraveNumber(kalag.grave_number);
+					setRelativeName(kalag.relative_name);
+					setRelativeNumber(kalag.relative_number);
+					setRelativeAddress(kalag.relative_address);
+					setRelativeRelation(kalag.relative_relation);
+				})
+				.catch((error) => console.error("Error fetching Kalag data:", error))
+				.finally(() => setIsLoading(false));
+		}
+	}, [modalIsOpen, kalagid]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -38,11 +65,12 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 		};
 
 		try {
-			const response = await api.post("/api/kalags/create/", kalagData);
-			console.log("Kalag created successfully:", response.data);
+			// Use PUT or PATCH for updating existing Kalag
+			const response = await api.put(`/api/kalag/${kalagid}/update/`, kalagData);
+			console.log("Kalag updated successfully:", response.data);
 			handleClose(); // Close the modal on successful submission
 		} catch (error) {
-			console.error("Error creating Kalag:", error);
+			console.error("Error updating Kalag:", error);
 		} finally {
 			setIsLoading(false);
 		}
@@ -59,8 +87,8 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 						overflowY: "auto", // Enable scrolling within the modal
 						p: 2,
 					}}>
-					<DialogTitle>Add Kalag in {section}</DialogTitle>
-					<DialogContent>Fill in the information of the Deceased person.</DialogContent>
+					<DialogTitle>Edit Kalag of {kalagname}</DialogTitle>
+					<DialogContent>Update the information of the Deceased person.</DialogContent>
 					<form onSubmit={handleSubmit}>
 						<p className="font-bold text-sm mb-2 mt-4">Deceased Person info</p>
 						<Stack spacing={2}>
@@ -168,7 +196,7 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 												size={20}
 												className="animate-spin mr-2"
 											/>
-											Adding
+											Updating
 										</div>
 									) : (
 										<>
@@ -176,7 +204,7 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 												fontSize="small"
 												className="mr-1"
 											/>{" "}
-											Add
+											Update
 										</>
 									)}
 								</Button>
