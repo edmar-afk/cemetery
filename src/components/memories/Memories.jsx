@@ -45,7 +45,7 @@ function Memories() {
 		<>
 			{/* Back button to go to the last visited URL */}
 			<div
-				className="absolute top-4 left-4 cursor-pointer text-blue-500"
+				className="absolute top-12 left-4 cursor-pointer text-blue-500"
 				onClick={() => navigate(-1)}>
 				<ArrowBackIcon />
 			</div>
