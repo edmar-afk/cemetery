@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import ImageIcon from "@mui/icons-material/Image"; // eslint-disable-next-line react/prop-types
+import ImageIcon from "@mui/icons-material/Image";
+
+// eslint-disable-next-line react/prop-types
 function Memory({ name }) {
 	return (
 		<>

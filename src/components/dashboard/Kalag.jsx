@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";import { faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";import EditOutlinedIcon from "@mui/icons-material/EditOutlined";import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { useEffect, useState } from "react";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import api from "../../assets/api";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import SearchKalag from "./SearchKalag";
-import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import EditKalagModal from "../Caretaker/EditKalagModal";
 import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
@@ -70,17 +71,14 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 								{isRefreshing ? "Refreshing..." : "Refresh"}
 							</div>
 						</div>
-						{kalagData.map((kalag) => (
+						{kalagData.map((kalag, index) => (
 							<div
 								key={kalag.id}
 								className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
 								<Link
 									to={`/memories/${kalag.id}`}
-									className="grid mr-4 place-items-center">
-									<FontAwesomeIcon
-										icon={faSkullCrossbones}
-										className="relative inline-block h-6 w-6 !rounded-full object-cover object-center"
-									/>
+									className="grid mr-2 place-items-center">
+									<p>{index + 1}.</p> {/* Display the count starting from 1 */}
 								</Link>
 								<div className="flex flex-col w-full">
 									<Link
@@ -100,10 +98,7 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 											{kalag.address}
 										</Link>
 										<div className="mr-1 flex items-center">
-											<PsychologyAltIcon
-												fontSize="medium"
-												className="bg-cyan-600 rounded-full p-1 text-white mr-1"
-											/>
+											
 											{isAdmin && (
 												<>
 													<Link to={`/memories/${kalag.id}`}>

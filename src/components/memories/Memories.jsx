@@ -116,7 +116,7 @@ function Memories() {
 						cemeterySection={kalagData.cemetery_section}
 					/>
 				) : (
-					<Memory name={kalagData.name} />
+						<Memory name={kalagData.name}/>
 				)}
 			</div>
 		</>
