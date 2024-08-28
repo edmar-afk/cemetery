@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";import { motion } from "framer-motion";import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import { useState, useEffect } from "react";import { motion } from "framer-motion";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";
 import Search from "../components/dashboard/Search";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -7,6 +9,7 @@ import { Link } from "react-router-dom";
 import api from "../assets/api";
 import { Tooltip } from "react-tooltip";
 import Map from "../components/dashboard/Map";
+import CropFreeIcon from "@mui/icons-material/CropFree";
 
 function Dashboard() {
 	const [searchToggle, setSearchToggle] = useState(false);
@@ -41,7 +44,7 @@ function Dashboard() {
 
 	useEffect(() => {
 		fetchPlots();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -82,6 +85,12 @@ function Dashboard() {
 					</div>
 
 					{/* Content below the sticky header */}
+					<Link
+						to={"/qrScanner"}
+						className="ml-4 flex items-center">
+						<CropFreeIcon />
+						<span className="text-xs ml-2">Open Scanner</span>
+					</Link>
 					<div className="text-gray-800 flex flex-row justify-between mx-4 my-4 pt-4">
 						<motion.div
 							initial={{ scale: 0 }}

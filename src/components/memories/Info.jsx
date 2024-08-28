@@ -1,10 +1,12 @@
 import LocationOnIcon from "@mui/icons-material/LocationOn";import AddLocationIcon from "@mui/icons-material/AddLocation";
+import GenerateQR from "./GenerateQR";
 
 // eslint-disable-next-line react/prop-types
 function Info({ name, address, graveNumber, cemeterySection }) {
 	return (
 		<>
 			<div className="z-[999]">
+				<GenerateQR/>
 				<p className="mt-2 mb-4 ml-4 font-bold">Info of {name}</p>
 				<div className="mb-0 mx-4 ">
 					<div

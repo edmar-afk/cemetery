@@ -14,6 +14,7 @@ import LowerCemetery from "./components/Caretaker/LowerCemetery";
 import { useEffect } from "react";
 import MasterList from "./components/masterlist/MasterList";
 import Memories from "./components/memories/Memories";
+import QRScanner from "./routes/QRScanner";
 
 function Logout() {
 	localStorage.clear();
@@ -115,6 +116,10 @@ function App() {
 							<Route
 								path="/memories/:kalagId/"
 								element={<Memories />}
+							/>
+							<Route
+								path="/qrScanner"
+								element={<QRScanner />}
 							/>
 							<Route
 								path="*"
