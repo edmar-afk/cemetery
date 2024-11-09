@@ -33,12 +33,12 @@ function NavBar() {
 					</motion.div>
 				</div>
 
-				<Link to={'/masterlist'} className="pt-8 -mb-8 flex justify-end">
+				{/* <Link to={'/masterlist'} className="pt-8 -mb-8 flex justify-end">
 					<div className="flex flex-col items-center">
 						<InventoryRoundedIcon />
 						<p className="text-[10px]">Masterlist</p>
 					</div>
-				</Link>
+				</Link> */}
 			</div>
 		</>
 	);

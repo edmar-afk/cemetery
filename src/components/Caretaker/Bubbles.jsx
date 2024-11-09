@@ -16,7 +16,7 @@ function Bubbles() {
 				} rounded-full py-1.5 px-3 shadow-xl z-50 cursor-pointer`}>
 				<Link
 					to="/upper"
-					className="text-xs m-1">
+					className="text-[10px] m-1">
 					Upper Cemetery
 				</Link>
 			</motion.div>
@@ -29,7 +29,7 @@ function Bubbles() {
 				} rounded-full py-1.5 px-3 shadow-xl z-50 cursor-pointer`}>
 				<Link
 					to="/home"
-					className="text-xs m-1">
+					className="text-[10px] m-1">
 					Center Cemetery
 				</Link>
 			</motion.div>
@@ -42,7 +42,7 @@ function Bubbles() {
 				} rounded-full py-2 px-3 shadow-xl z-50 cursor-pointer`}>
 				<Link
 					to="/lower"
-					className="text-xs">
+					className="text-[10px]">
 					Lower Cemetery
 				</Link>
 			</motion.div>

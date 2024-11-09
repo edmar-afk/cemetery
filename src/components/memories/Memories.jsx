@@ -5,27 +5,55 @@ import Loading from "../loading/Loading";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Info from "./Info";
 import Memory from "./Memory";
-
 function Memories() {
 	const { kalagId } = useParams(); // Get the kalagId from the URL
 	const navigate = useNavigate(); // Initialize the navigate function
 	const [kalagData, setKalagData] = useState(null); // State to store kalag data
+	const [profilePic, setProfilePic] = useState(logo); // State to store profile picture URL
 	const [loading, setLoading] = useState(true); // State to handle loading
 	const [activeComponent, setActiveComponent] = useState("info"); // State to toggle between Info and Memory
 
 	useEffect(() => {
-		// Fetch kalag data when component mounts
+		// Fetch kalag data
 		api
 			.get(`/api/kalags/${kalagId}/`)
 			.then((response) => {
 				setKalagData(response.data);
-				setLoading(false);
+				setLoading(false); // Stop loading after data is fetched
 			})
 			.catch((error) => {
 				console.error("Error fetching kalag data:", error);
 				setLoading(false);
 			});
-	}, [kalagId]);
+
+		// Fetch profile picture from memories list
+		api
+			.get(`/api/kalags/${kalagId}/memories-list/`)
+			.then((response) => {
+				console.log("Full Response:", response); // Log the full response
+				console.log("Response Data:", response.data); // Log the response data
+
+				// Check if the response contains an array and access the first element
+				if (Array.isArray(response.data) && response.data.length > 0) {
+					const profilePicData = response.data[0]; // Access the first memory object
+					if (profilePicData.profile_pic) {
+						const pic = profilePicData.profile_pic;
+
+						setProfilePic(pic); // Setting the profilePic state
+						console.log("Profile Picture URL:", pic); // Log the final URL being set
+					} else {
+						console.log("No profile_pic in response data.");
+						setProfilePic(null); // Set profilePic to null if not found
+					}
+				} else {
+					console.log("No memories found in response data.");
+					setProfilePic(null); // Set profilePic to null if no memories exist
+				}
+			})
+			.catch((error) => {
+				console.error("Error fetching profile picture:", error);
+			});
+	}, [kalagId]); // Run this effect when kalagId changes
 
 	if (loading) {
 		return <Loading />;
@@ -41,6 +69,8 @@ function Memories() {
 		}).format(date);
 	};
 
+	console.log("Profile Picture URL:", profilePic); // Debugging the profile picture URL
+
 	return (
 		<>
 			{/* Back button to go to the last visited URL */}
@@ -53,9 +83,10 @@ function Memories() {
 				<div className="bg-white pt-16 pb-4 shadow-lg rounded-b-3xl">
 					<img
 						className="block h-24 w-24 mx-auto max-w-full rounded-full align-middle"
-						src={logo}
+						src={profilePic} // Display profile pic if available, else fallback to logo
 						alt="Profile picture"
 					/>
+
 					<div className="flex flex-col items-center text-center mb-2">
 						<h4 className="text-lg font-medium sm:m-0">{kalagData ? kalagData.name : "Name not available"}</h4>
 						<p className="font-sans text-sm tracking-normal text-gray-500">
@@ -116,7 +147,7 @@ function Memories() {
 						cemeterySection={kalagData.cemetery_section}
 					/>
 				) : (
-						<Memory name={kalagData.name}/>
+					<Memory name={kalagData.name} />
 				)}
 			</div>
 		</>

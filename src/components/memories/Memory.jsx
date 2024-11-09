@@ -1,33 +1,101 @@
-/* eslint-disable react/no-unescaped-entities */
-import ImageIcon from "@mui/icons-material/Image";
+/* eslint-disable react/prop-types */import { useState, useEffect } from "react";import { useParams } from "react-router-dom";
+import AddMemories from "./AddMemories";
+import AddImageMemories from "./AddImageMemories";
+import api from "../../assets/api";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css"; // Import the default CSS for the zoom effect
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-// eslint-disable-next-line react/prop-types
 function Memory({ name }) {
+	const userData = JSON.parse(localStorage.getItem("userData"));
+	const { kalagId } = useParams(); // Get the kalagId from the URL
+
+	const [memories, setMemories] = useState([]); // State for storing memories
+	const [kalagImages, setKalagImages] = useState([]); // State for storing Kalag images
+
+	// Fetch memories when the component mounts
+	useEffect(() => {
+		const fetchMemories = async () => {
+			try {
+				const response = await api.get(`/api/kalags/${kalagId}/memories-list/`);
+				setMemories(response.data); // Update state with fetched memories
+			} catch (error) {
+				console.error("Error fetching memories:", error);
+			}
+		};
+		fetchMemories();
+	}, [kalagId]);
+
+	// Fetch Kalag images when the component mounts
+	useEffect(() => {
+		const fetchKalagImages = async () => {
+			try {
+				const response = await api.get(`/api/kalags/${kalagId}/images/`);
+				setKalagImages(response.data); // Update state with fetched images
+			} catch (error) {
+				console.error("Error fetching Kalag images:", error);
+			}
+		};
+		fetchKalagImages();
+	}, [kalagId]);
+
+	// Handle delete image
+	const handleDelete = async (imageId) => {
+		try {
+			const response = await api.delete(`/api/imagesmemories/${imageId}/delete/`);
+			if (response.status === 204) {
+				// Successfully deleted, remove the image from state
+				setKalagImages(kalagImages.filter((image) => image.id !== imageId));
+			}
+		} catch (error) {
+			console.error("Error deleting image:", error);
+		}
+	};
+
 	return (
 		<>
-			{" "}
 			<p className="text-left text-sm ml-4 mt-2 font-bold">Memories of our beloved {name}</p>
+
 			<div className="bg-white rounded-t-3xl shadow-lg p-4">
-				<p className="italic text-gray-500">
-					"Available in Capstone 2 Available in Capstone 2 Available in Capstone 2 Available in Capstone 2 Available in
-					Capstone 2 Available in Capstone 2 Available in Capstone 2 Available in Capstone 2"
-				</p>
+				{userData && <AddMemories kalagId={kalagId} />}
+
+				<div className="italic text-gray-500">
+					{memories.length > 0
+						? memories.map((memory, index) => <p key={index}>{memory.speech}</p>)
+						: "No memories were added to this Kalag."}
+				</div>
 
 				<div className="pt-6">
-					<p className="font-bold">Images and Videos of {name}</p>
-					available in capstone 2
-					<ImageIcon
-						style={{ fontSize: "350px" }}
-						className="text-gray-400"
-					/>
-					<ImageIcon
-						style={{ fontSize: "350px" }}
-						className="text-gray-400"
-					/>
-					<ImageIcon
-						style={{ fontSize: "350px" }}
-						className="text-gray-400"
-					/>
+					<div className="flex flex-row items-center justify-between">
+						<p className="font-bold">Images of {name}</p>
+						{userData && <AddImageMemories />}
+					</div>
+
+					<div className="flex flex-row justify-start flex-wrap mt-16">
+						{/* Display each Kalag image with zoom */}
+						{kalagImages.length > 0 ? (
+							kalagImages.map((image, index) => (
+								<div
+									key={index}
+									className="relative">
+									<Zoom>
+										<img
+											src={`${import.meta.env.VITE_API_URL}${image.background_image}`} // Use VITE_ prefix
+											alt={`Memory image ${index + 1}`}
+											className="w-[150px] h-[150px] object-cover rounded-lg shadow-lg m-2 cursor-pointer"
+										/>
+									</Zoom>
+									<button
+										className="absolute top-0 right-0 bg-red-400 text-white p-0.5 px-1 rounded-full shadow-md z-50"
+										onClick={() => handleDelete(image.id)}>
+										<HighlightOffIcon fontSize="small" />
+									</button>
+								</div>
+							))
+						) : (
+							<p className="text-gray-500">No images were added to this Kalag.</p>
+						)}
+					</div>
 				</div>
 			</div>
 		</>

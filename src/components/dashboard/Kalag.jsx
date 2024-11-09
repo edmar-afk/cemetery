@@ -4,7 +4,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import api from "../../assets/api";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-import SearchKalag from "./SearchKalag";
+//import SearchKalag from "./SearchKalag";
 import EditKalagModal from "../Caretaker/EditKalagModal";
 import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
@@ -62,7 +62,7 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 				<div className="relative flex flex-col text-gray-700 rounded-xl bg-clip-border">
 					<nav className="flex flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
 						<div className="flex justify-end items-center text-xs mr-4 py-3 cursor-pointer">
-							{isAdmin && <SearchKalag />}
+							{/* {isAdmin && <SearchKalag />} */}
 							<div onClick={refreshData}>
 								<RefreshIcon
 									fontSize="small"
