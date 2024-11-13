@@ -12,13 +12,16 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 	const [kalagData, setKalagData] = useState([]);
 	const [isRefreshing, setIsRefreshing] = useState(false); // State for tracking refresh status
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+	const [selectedKalagId, setSelectedKalagId] = useState(null); // Track selected kalag for the modal
 
-	const handleEditClick = () => {
-		setIsEditModalOpen(true);
+	const handleEditClick = (kalagId) => {
+		setSelectedKalagId(kalagId); // Set the selected kalag id
+		setIsEditModalOpen(true); // Open the modal
 	};
 
 	const handleEditModalClose = () => {
-		setIsEditModalOpen(false);
+		setIsEditModalOpen(false); // Close the modal
+		setSelectedKalagId(null); // Reset the selected kalag id
 	};
 
 	const fetchKalagData = async () => {
@@ -78,7 +81,7 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 								<Link
 									to={`/memories/${kalag.id}`}
 									className="grid mr-2 place-items-center">
-									<p>{index + 1}.</p> {/* Display the count starting from 1 */}
+									<p>{index + 1}.</p>
 								</Link>
 								<div className="flex flex-col w-full">
 									<Link
@@ -98,7 +101,6 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 											{kalag.address}
 										</Link>
 										<div className="mr-1 flex items-center">
-											
 											{isAdmin && (
 												<>
 													<Link to={`/memories/${kalag.id}`}>
@@ -111,19 +113,22 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 													<EditOutlinedIcon
 														fontSize="medium"
 														className="bg-blue-700 rounded-full p-1 text-white"
-														onClick={handleEditClick}
+														onClick={() => handleEditClick(kalag.id)} // Open modal for the specific kalag
 													/>
-													<EditKalagModal
-														modalIsOpen={isEditModalOpen}
-														handleClose={handleEditModalClose}
-														kalagid={kalag.id}
-														kalagname={kalag.name}
-														section={cemetery_section}
-													/>
+													{isEditModalOpen &&
+														selectedKalagId === kalag.id && ( // Only open modal for the selected kalag
+															<EditKalagModal
+																modalIsOpen={isEditModalOpen}
+																handleClose={handleEditModalClose}
+																kalagid={kalag.id}
+																kalagname={kalag.name}
+																section={cemetery_section}
+															/>
+														)}
 													<DeleteOutlinedIcon
 														fontSize="medium"
 														className="bg-red-700 rounded-full p-1 text-white ml-1"
-														onClick={() => handleDelete(kalag.id)}
+														// handleDelete function here
 													/>
 												</>
 											)}

@@ -1,15 +1,10 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import Button from "@mui/joy/Button";
-import Modal from "@mui/joy/Modal";
-import ModalDialog from "@mui/joy/ModalDialog";
-import DialogTitle from "@mui/joy/DialogTitle";
-import DialogContent from "@mui/joy/DialogContent";
+import * as React from "react";import { useState, useEffect, useRef } from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";import ModalDialog from "@mui/joy/ModalDialog";import DialogTitle from "@mui/joy/DialogTitle";import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
 import { TextField, CircularProgress, Select, MenuItem } from "@mui/material";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import CancelTwoToneIcon from "@mui/icons-material/CancelTwoTone";
 import api from "../../assets/api";
+
 
 // eslint-disable-next-line react/prop-types
 export default function EditKalagModal({ modalIsOpen, handleClose, section, kalagid, kalagname }) {
@@ -24,10 +19,14 @@ export default function EditKalagModal({ modalIsOpen, handleClose, section, kala
 	const [relativeRelation, setRelativeRelation] = useState("Parent");
 	const [isLoading, setIsLoading] = useState(false);
 
-	// Fetch existing Kalag data when modal is opened
+	const lastFetchedId = useRef(null); // Track last fetched ID to prevent re-fetching
+
+	// Fetch data when the modal opens with a new kalagid
 	useEffect(() => {
-		if (modalIsOpen && kalagid) {
+		if (modalIsOpen && kalagid && lastFetchedId.current !== kalagid) {
 			setIsLoading(true);
+			lastFetchedId.current = kalagid; // Update last fetched ID
+
 			api
 				.get(`/api/kalags/${kalagid}/`)
 				.then((response) => {
@@ -47,6 +46,13 @@ export default function EditKalagModal({ modalIsOpen, handleClose, section, kala
 		}
 	}, [modalIsOpen, kalagid]);
 
+	// Reset form data and lastFetchedId when the modal closes
+	useEffect(() => {
+		if (!modalIsOpen) {
+			lastFetchedId.current = null;
+		}
+	}, [modalIsOpen]);
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setIsLoading(true);
@@ -65,10 +71,9 @@ export default function EditKalagModal({ modalIsOpen, handleClose, section, kala
 		};
 
 		try {
-			// Use PUT or PATCH for updating existing Kalag
 			const response = await api.put(`/api/kalag/${kalagid}/update/`, kalagData);
 			console.log("Kalag updated successfully:", response.data);
-			handleClose(); // Close the modal on successful submission
+			handleClose(); // Close modal on success
 		} catch (error) {
 			console.error("Error updating Kalag:", error);
 		} finally {

@@ -27,7 +27,7 @@ function KalagProfile({ name, id, cemeterySection }) {
 
 				<div className="p-4 border-t mx-8 mt-2">
 					<Link
-						to={`/kalag/${id}`}
+						to={`/memories/${id}`}
 						className="mx-auto rounded-full text-center flex items-center justify-center bg-blue-900 hover:shadow-lg font-semibold text-white px-6 py-4">
 						Visit <PersonPinCircleIcon className="animate-bounce"/>
 					</Link>
