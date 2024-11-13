@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { useEffect, useState } from "react";import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import api from "../../assets/api";
@@ -128,7 +127,7 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 													<DeleteOutlinedIcon
 														fontSize="medium"
 														className="bg-red-700 rounded-full p-1 text-white ml-1"
-														// handleDelete function here
+														onClick={() => handleDelete(kalag.id)} // Call delete function
 													/>
 												</>
 											)}
