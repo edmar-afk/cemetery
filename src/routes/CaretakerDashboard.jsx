@@ -61,7 +61,7 @@ function CaretakerDashboard() {
 				<Bubbles />
 				<div className="bg-white mx-2 rounded-t-3xl shadow-2xl h-fit mt-4">
 					<div className="flex flex-row justify-between p-4 mx-2">
-						<p className="">Center Cemetery</p>
+						<p className="">Center Portion</p>
 						<div>
 							<AddCircleOutlineOutlinedIcon
 								fontSize="medium"
