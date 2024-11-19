@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";import api from "../../assets/api";
-import NavBar from "./NavBar";
+import { useState, useEffect } from "react";import api from "../../assets/api";import NavBar from "./NavBar";
 import Bubbles from "./Bubbles";
 import Time from "./Time";
 import Kalag from "../dashboard/Kalag";
@@ -47,12 +46,12 @@ function UpperCemetery() {
 		<>
 			<BasicModalDialog
 				modalIsOpen={modalState.basicModalOpen}
-				section="Upper Cemetery"
+				section="Upper Portion"
 				handleClose={() => toggleModal("basicModalOpen")}
 			/>
 			<PlotModal
 				modalIsOpen={modalState.plotModalOpen}
-				section="Upper Cemetery"
+				section="Upper Portion"
 				sectionAPI="upperCemetery"
 				handleClose={() => toggleModal("plotModalOpen")}
 				onSuccess={handlePlotSubmissionSuccess} // Pass the callback function
@@ -94,7 +93,7 @@ function UpperCemetery() {
 
 					<Kalag
 						isAdmin={true}
-						cemetery_section="Upper Cemetery"
+						cemetery_section="Upper Portion"
 						setKalagCount={setKalagCount}
 					/>
 				</div>

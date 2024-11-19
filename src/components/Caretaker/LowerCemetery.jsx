@@ -26,7 +26,7 @@ function LowerCemetery() {
 	const fetchPlots = async () => {
 		try {
 			const response = await api.get("/api/plots-list/", {
-				params: { cemetery_section: "Lower Cemetery" },
+				params: { cemetery_section: "Lower Portion" },
 			});
 			setLatestPlot(response.data[0] || null); // Update with the latest plot
 		} catch (error) {
@@ -46,12 +46,12 @@ function LowerCemetery() {
 		<>
 			<BasicModalDialog
 				modalIsOpen={modalState.basicModalOpen}
-				section="Lower Cemetery"
+				section="Lower Portion"
 				handleClose={() => toggleModal("basicModalOpen")}
 			/>
 			<PlotModal
 				modalIsOpen={modalState.plotModalOpen}
-				section="Lower Cemetery"
+				section="Lower Portion"
 				sectionAPI="lowerCemetery"
 				handleClose={() => toggleModal("plotModalOpen")}
 				onSuccess={handlePlotSubmissionSuccess} // Pass the callback function
@@ -92,7 +92,7 @@ function LowerCemetery() {
 					)}
 					<Kalag
 						isAdmin={true}
-						cemetery_section="Lower Cemetery"
+						cemetery_section="Lower Portion"
 						setKalagCount={setKalagCount}
 					/>
 				</div>

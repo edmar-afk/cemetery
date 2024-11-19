@@ -1,51 +1,56 @@
-import { useState } from "react";import { useParams } from "react-router-dom";import { Modal, Box, Button, Typography } from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import api from "../../assets/api";
+import { useState } from "react";import { useParams } from "react-router-dom";import { Modal, Box, Button, Typography, CircularProgress } from "@mui/material";import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";import api from "../../assets/api";
 
 function AddImageMemories() {
 	const { kalagId } = useParams(); // Get the kalagId from the URL
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
+	const [isUploading, setIsUploading] = useState(false); // Track upload state
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
 	const handleFileChange = (event) => {
 		const selectedFile = event.target.files[0];
-		if (selectedFile && !selectedFile.type.startsWith("image/")) {
-			alert("Only image files can be uploaded");
-			event.target.value = null; // Clear the input
-			return;
+		if (selectedFile) {
+			// Check if the file is an image or video
+			const fileType = selectedFile.type;
+			if (!fileType.startsWith("image/") && !fileType.startsWith("video/")) {
+				alert("Only image or video files can be uploaded");
+				event.target.value = null; // Clear the input
+				return;
+			}
+			setFile(selectedFile);
 		}
-		setFile(selectedFile);
 	};
 
 	const handleUpload = async () => {
 		if (!file) {
-			alert("Please select an image file to upload.");
+			alert("Please select an image or video file to upload.");
 			return;
 		}
 
 		const formData = new FormData();
 		formData.append("kalag", kalagId);
-		formData.append("background_image", file);
+		formData.append("background_image", file); // Change 'media' to 'background_image'
 
 		try {
-			await api.post(`/api/kalags/${kalagId}/upload-image-memory/`, formData, {
+			setIsUploading(true); // Set uploading state to true
+			await api.post(`/api/upload-background-image/${kalagId}/`, formData, {
 				headers: { "Content-Type": "multipart/form-data" },
 			});
-			alert("Image uploaded successfully!");
+			alert("File uploaded successfully!");
 			setFile(null); // Clear file after upload
 			handleClose();
+			setIsUploading(false); // Reset uploading state
 
 			// Reload the page to fetch the latest data
 			window.location.reload();
 		} catch (error) {
-			console.error("Error uploading image:", error);
-			alert("Failed to upload image. Please try again.");
+			console.error("Error uploading file:", error);
+			alert("Failed to upload file. Please try again.");
+			setIsUploading(false); // Reset uploading state
 		}
 	};
-
 
 	return (
 		<>
@@ -57,8 +62,8 @@ function AddImageMemories() {
 			<Modal
 				open={open}
 				onClose={handleClose}
-				aria-labelledby="add-image-modal"
-				aria-describedby="add-image-description">
+				aria-labelledby="add-media-modal"
+				aria-describedby="add-media-description">
 				<Box
 					sx={{
 						position: "absolute",
@@ -72,15 +77,15 @@ function AddImageMemories() {
 						p: 4,
 					}}>
 					<Typography
-						id="add-image-modal"
+						id="add-media-modal"
 						variant="h6"
 						component="h2"
 						gutterBottom>
-						Upload Image Memory
+						Upload Image/Video Memory
 					</Typography>
 					<input
 						type="file"
-						accept="image/*"
+						accept="image/*, video/*"
 						onChange={handleFileChange}
 					/>
 					{file && (
@@ -95,8 +100,20 @@ function AddImageMemories() {
 						variant="contained"
 						color="primary"
 						onClick={handleUpload}
-						sx={{ mt: 3 }}>
-						Upload
+						sx={{ mt: 3 }}
+						disabled={isUploading} // Disable button during upload
+					>
+						{isUploading ? (
+							<>
+								<CircularProgress
+									size={24}
+									sx={{ marginRight: 2 }}
+								/>{" "}
+								Uploading...
+							</>
+						) : (
+							"Upload"
+						)}
 					</Button>
 				</Box>
 			</Modal>

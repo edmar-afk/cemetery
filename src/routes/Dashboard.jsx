@@ -1,64 +1,65 @@
-import { useState, useEffect } from "react";import { motion } from "framer-motion";
+/* eslint-disable react-hooks/exhaustive-deps */ import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Kalag from "../components/dashboard/Kalag";
-import Search from "../components/dashboard/Search";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
 import api from "../assets/api";
 import { Tooltip } from "react-tooltip";
 import Map from "../components/dashboard/Map";
-import CropFreeIcon from "@mui/icons-material/CropFree";
 
 function Dashboard() {
 	const [searchToggle, setSearchToggle] = useState(false);
-	const [currentSection, setCurrentSection] = useState("Upper Cemetery");
+	const [currentSection, setCurrentSection] = useState("Upper Portion");
 	const [kalagCount, setKalagCount] = useState(0);
 	const [latestPlot, setLatestPlot] = useState(null);
-	const sections = ["Upper Cemetery", "Center Cemetery", "Lower Cemetery"];
+	const sections = ["Upper Portion", "Center Portion", "Lower Portion"];
 
+	// Handle next section change (looping over available sections)
 	const handleNextSection = () => {
 		const currentIndex = sections.indexOf(currentSection);
 		const nextIndex = (currentIndex + 1) % sections.length;
 		setCurrentSection(sections[nextIndex]);
 	};
 
+	// Handle previous section change (looping over available sections)
 	const handlePreviousSection = () => {
 		const currentIndex = sections.indexOf(currentSection);
 		const previousIndex = (currentIndex - 1 + sections.length) % sections.length;
 		setCurrentSection(sections[previousIndex]);
 	};
 
+	// Fetch the plots data based on current cemetery section
 	const fetchPlots = async () => {
 		try {
 			const response = await api.get("/api/plots-list/", {
-				params: { cemetery_section: "Upper Cemetery" },
+				params: { cemetery_section: currentSection },
 			});
-			console.log(latestPlot);
 			setLatestPlot(response.data[0] || null); // Update with the latest plot
 		} catch (error) {
 			console.error("Error fetching plots:", error);
 		}
 	};
 
+	// Fetch plots whenever the currentSection changes
 	useEffect(() => {
 		fetchPlots();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [currentSection]);
 
 	return (
 		<>
-			<Search searchToggle={searchToggle} />
+			{/* Search Component with passed callback to handle first result section */}
+
 			<div className="h-screen bg-white">
-				{/* Map component with horizontal scrolling */}
+				{/* Map Component with cemeterySection as prop */}
 				<div className="overflow-x-auto">
 					<Map cemeterySection={currentSection} />
 				</div>
 
-				{/* Fixed container that scrolls vertically */}
+				{/* Fixed container for the sidebar */}
 				<div className="fixed top-[330px] rounded-t-3xl h-screen w-screen bg-gray-200 overflow-y-auto z-[9999]">
-					{/* Header with sticky behavior */}
 					<div className="sticky top-0 pt-1 pb-2 bg-gray-200 z-50">
 						<div className="text-gray-700 text-center my-4 text-xl font-semibold flex flex-row justify-between mx-8">
 							<motion.div
@@ -85,12 +86,7 @@ function Dashboard() {
 					</div>
 
 					{/* Content below the sticky header */}
-					<Link
-						to={"/qrScanner"}
-						className="ml-4 flex items-center">
-						<CropFreeIcon />
-						<span className="text-xs ml-2">Open Scanner</span>
-					</Link>
+
 					<div className="text-gray-800 flex flex-row justify-between mx-4 my-4 pt-4">
 						<motion.div
 							initial={{ scale: 0 }}
@@ -109,9 +105,10 @@ function Dashboard() {
 								initial={{ scale: 0 }}
 								animate={{ scale: 1 }}
 								transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.2 }}
-								onClick={() => setSearchToggle(!searchToggle)}
 								className="flex justify-end text-blue-800 hover:cursor-pointer">
-								<SearchOutlinedIcon fontSize="medium" />
+								<Link to={'/search'}>
+									<SearchOutlinedIcon fontSize="medium" />
+								</Link>
 							</motion.div>
 							<motion.div
 								initial={{ scale: 0 }}
@@ -127,7 +124,7 @@ function Dashboard() {
 						</div>
 					</div>
 
-					{/* Kalag component */}
+					{/* Kalag Component */}
 					<Kalag
 						isAdmin={false}
 						cemetery_section={currentSection}

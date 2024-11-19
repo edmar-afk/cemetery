@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import MasterList from "./components/masterlist/MasterList";
 import Memories from "./components/memories/Memories";
 import QRScanner from "./routes/QRScanner";
+import Search from "./routes/Search";
 
 function Logout() {
 	localStorage.clear();
@@ -80,6 +81,10 @@ function App() {
 							<Route
 								path="/dashboard"
 								element={<Dashboard />}
+							/>
+							<Route
+								path="/search"
+								element={<Search />}
 							/>
 							<Route
 								path="/upper"

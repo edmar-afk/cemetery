@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
-import map from "../../assets/img/map.jpg";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
+import { motion } from "framer-motion";import map from "../../assets/img/map.jpg";import AddLocationIcon from "@mui/icons-material/AddLocation";
 // eslint-disable-next-line react/prop-types
 function Map({ cemeterySection }) {
 	return (
@@ -11,7 +9,7 @@ function Map({ cemeterySection }) {
 					alt="Map"
 					className="h-[440px] w-full relative z-50"
 				/>
-				{cemeterySection === "Upper Cemetery" && (
+				{cemeterySection === "Upper Portion" && (
 					<motion.div
 						className="absolute p-6 border-4 rounded-full z-50 top-[240px] left-[250px] bg-white/40"
 						initial={{ scale: 0.8 }} // Initial state
@@ -23,12 +21,12 @@ function Map({ cemeterySection }) {
 							repeatType: "reverse", // Reverses the animation back to initial
 						}}>
 						<p className="text-sm font-bold">
-							<AddLocationIcon/>
+							<AddLocationIcon />
 						</p>
 					</motion.div>
 				)}
 
-				{cemeterySection === "Center Cemetery" && (
+				{cemeterySection === "Center Portion" && (
 					<motion.div
 						className="absolute p-6 rounded-full border-4 z-50 top-[100px] left-[80px] bg-white/40"
 						initial={{ scale: 0.8 }} // Initial state
@@ -40,12 +38,12 @@ function Map({ cemeterySection }) {
 							repeatType: "reverse", // Reverses the animation back to initial
 						}}>
 						<p className="text-sm font-bold">
-							<AddLocationIcon/>
+							<AddLocationIcon />
 						</p>
 					</motion.div>
 				)}
 
-				{cemeterySection === "Lower Cemetery" && (
+				{cemeterySection === "Lower Portion" && (
 					<motion.div
 						className="absolute p-6 rounded-full border-4 z-50 top-[76px] left-[254px] bg-white/40"
 						initial={{ scale: 0.8 }} // Initial state
@@ -57,7 +55,7 @@ function Map({ cemeterySection }) {
 							repeatType: "reverse", // Reverses the animation back to initial
 						}}>
 						<p className="text-sm font-bold">
-							<AddLocationIcon/>
+							<AddLocationIcon />
 						</p>
 					</motion.div>
 				)}

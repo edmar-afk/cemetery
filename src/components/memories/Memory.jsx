@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */import { useState, useEffect } from "react";import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";import { useParams } from "react-router-dom";
 import AddMemories from "./AddMemories";
 import AddImageMemories from "./AddImageMemories";
 import api from "../../assets/api";
@@ -52,6 +52,21 @@ function Memory({ name }) {
 		}
 	};
 
+	// Function to determine whether the background_image is a video or image
+	const getFileType = (filePath) => {
+		const fileExtension = filePath.split(".").pop().toLowerCase();
+		const imageExtensions = ["png", "jpeg", "jpg"];
+		const videoExtensions = ["mp4", "mov", "mkv", "wmv", "mpeg"];
+
+		if (imageExtensions.includes(fileExtension)) {
+			return "image";
+		}
+		if (videoExtensions.includes(fileExtension)) {
+			return "video";
+		}
+		return null;
+	};
+
 	return (
 		<>
 			<p className="text-left text-sm ml-4 mt-2 font-bold">Memories of our beloved {name}</p>
@@ -67,24 +82,40 @@ function Memory({ name }) {
 
 				<div className="pt-6">
 					<div className="flex flex-row items-center justify-between">
-						<p className="font-bold">Images of {name}</p>
+						<p className="font-bold">
+							Images/Videos of <br /> {name}
+						</p>
 						{userData && <AddImageMemories />}
 					</div>
 
 					<div className="flex flex-row justify-start flex-wrap mt-16">
-						{/* Display each Kalag image with zoom */}
+						{/* Display each Kalag image or video */}
 						{kalagImages.length > 0 ? (
 							kalagImages.map((image, index) => (
 								<div
 									key={index}
 									className="relative">
-									<Zoom>
-										<img
-											src={`${import.meta.env.VITE_API_URL}${image.background_image}`} // Use VITE_ prefix
-											alt={`Memory image ${index + 1}`}
+									{/* Check the file type and render accordingly */}
+									{getFileType(image.background_image) === "image" ? (
+										<Zoom>
+											<img
+												src={`${import.meta.env.VITE_API_URL}${image.background_image}`} // Use VITE_ prefix
+												alt={`Memory image ${index + 1}`}
+												className="w-[150px] h-[150px] object-cover rounded-lg shadow-lg m-2 cursor-pointer"
+											/>
+										</Zoom>
+									) : getFileType(image.background_image) === "video" ? (
+										<video
 											className="w-[150px] h-[150px] object-cover rounded-lg shadow-lg m-2 cursor-pointer"
-										/>
-									</Zoom>
+											controls>
+											<source
+												src={`${import.meta.env.VITE_API_URL}${image.background_image}`}
+												type="video/mp4"
+											/>
+											Your browser does not support the video tag.
+										</video>
+									) : null}
+
 									<button
 										className="absolute top-0 right-0 bg-red-400 text-white p-0.5 px-1 rounded-full shadow-md z-50"
 										onClick={() => handleDelete(image.id)}>
@@ -93,7 +124,7 @@ function Memory({ name }) {
 								</div>
 							))
 						) : (
-							<p className="text-gray-500">No images were added to this Kalag.</p>
+							<p className="text-gray-500">No images or videos were added to this Kalag.</p>
 						)}
 					</div>
 				</div>

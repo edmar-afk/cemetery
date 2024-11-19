@@ -25,7 +25,7 @@ function CaretakerDashboard() {
 	const fetchPlots = async () => {
 		try {
 			const response = await api.get("/api/plots-list/", {
-				params: { cemetery_section: "Center Cemetery" },
+				params: { cemetery_section: "Center Portion" },
 			});
 			setLatestPlot(response.data[0] || null); // Update with the latest plot
 		} catch (error) {
@@ -45,12 +45,12 @@ function CaretakerDashboard() {
 		<>
 			<BasicModalDialog
 				modalIsOpen={modalState.basicModalOpen}
-				section="Center Cemetery"
+				section="Center Portion"
 				handleClose={() => toggleModal("basicModalOpen")}
 			/>
 			<PlotModal
 				modalIsOpen={modalState.plotModalOpen}
-				section="Center Cemetery"
+				section="Center Portion"
 				sectionAPI="centerCemetery"
 				handleClose={() => toggleModal("plotModalOpen")}
 				onSuccess={handlePlotSubmissionSuccess} // Pass the callback function
@@ -94,7 +94,7 @@ function CaretakerDashboard() {
 					)}
 					<Kalag
 						isAdmin={true}
-						cemetery_section="Center Cemetery"
+						cemetery_section="Center Portion"
 						setKalagCount={setKalagCount}
 					/>
 				</div>
