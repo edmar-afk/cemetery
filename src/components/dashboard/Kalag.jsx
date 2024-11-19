@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { useEffect, useState } from "react";import EditOutlinedIcon from "@mui/icons-material/EditOutlined";import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import api from "../../assets/api";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -24,17 +23,20 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 	};
 
 	const fetchKalagData = async () => {
-		setIsRefreshing(true); // Set to "Refreshing..." when clicked
+		setIsRefreshing(true);
 		try {
 			const response = await api.get(`/api/kalag/?cemetery_section=${cemetery_section}`);
-			setKalagData(response.data);
-			setKalagCount(response.data.length); // Update the parent with the count
+			console.log("API Response:", response.data); // Check the response
+			console.log("Items received:", response.data.length); // Verify the number of items
+			setKalagData(response.data); // Ensure all data is stored in state
+			setKalagCount(response.data.length); // Update count
 		} catch (error) {
 			console.error("Error fetching Kalag data:", error);
 		} finally {
-			setIsRefreshing(false); // Set back to "Refresh" when done
+			setIsRefreshing(false);
 		}
 	};
+
 
 	useEffect(() => {
 		fetchKalagData();

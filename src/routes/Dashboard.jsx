@@ -59,7 +59,7 @@ function Dashboard() {
 				</div>
 
 				{/* Fixed container for the sidebar */}
-				<div className="fixed top-[330px] rounded-t-3xl h-screen w-screen bg-gray-200 overflow-y-auto z-[9999]">
+				<div className="fixed top-[330px] rounded-t-3xl h-full w-screen pb-80 bg-gray-200 overflow-y-auto z-[9999]">
 					<div className="sticky top-0 pt-1 pb-2 bg-gray-200 z-50">
 						<div className="text-gray-700 text-center my-4 text-xl font-semibold flex flex-row justify-between mx-8">
 							<motion.div
