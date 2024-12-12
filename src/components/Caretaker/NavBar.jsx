@@ -21,7 +21,7 @@ function NavBar() {
 							animate={{ scale: 1 }}
 							transition={{ type: "spring", stiffness: 150, bounce: 0.5, delay: 0.2 }}
 							className="text-lg font-semibold">
-							Welcome, caretaker {userData.first_name}
+							Welcome, Admin {userData.first_name}
 						</motion.p>
 					</div>
 					<motion.div

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";import { useParams } from "react-router-dom";
-import AddMemories from "./AddMemories";
+import { useState, useEffect } from "react";import { useParams } from "react-router-dom";import AddMemories from "./AddMemories";
 import AddImageMemories from "./AddImageMemories";
 import api from "../../assets/api";
 import Zoom from "react-medium-image-zoom";
@@ -54,6 +53,10 @@ function Memory({ name }) {
 
 	// Function to determine whether the background_image is a video or image
 	const getFileType = (filePath) => {
+		if (!filePath) {
+			return null; // or handle it in another way, e.g., return 'invalid' or throw an error
+		}
+
 		const fileExtension = filePath.split(".").pop().toLowerCase();
 		const imageExtensions = ["png", "jpeg", "jpg"];
 		const videoExtensions = ["mp4", "mov", "mkv", "wmv", "mpeg"];

@@ -59,7 +59,7 @@ function Login() {
 								animate={{ x: 0 }}
 								transition={{ type: "spring", stiffness: 50 }}
 								className="mb-12">
-								<h3 className="text-gray-800 text-2xl font-extrabold text-center">Welcome, caretaker!</h3>
+								<h3 className="text-gray-800 text-2xl font-extrabold text-center">Welcome, Admin!</h3>
 							</motion.div>
 
 							<motion.div

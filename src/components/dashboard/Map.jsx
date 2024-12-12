@@ -9,7 +9,7 @@ function Map({ cemeterySection }) {
 					alt="Map"
 					className="h-[440px] w-full relative z-50"
 				/>
-				{cemeterySection === "Upper Portion" && (
+				{cemeterySection === "Lower Portion" && (
 					<motion.div
 						className="absolute p-6 border-4 rounded-full z-50 top-[240px] left-[250px] bg-white/40"
 						initial={{ scale: 0.8 }} // Initial state
@@ -43,7 +43,7 @@ function Map({ cemeterySection }) {
 					</motion.div>
 				)}
 
-				{cemeterySection === "Lower Portion" && (
+				{cemeterySection === "Upper Portion" && (
 					<motion.div
 						className="absolute p-6 rounded-full border-4 z-50 top-[76px] left-[254px] bg-white/40"
 						initial={{ scale: 0.8 }} // Initial state

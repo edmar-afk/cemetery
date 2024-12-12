@@ -82,7 +82,7 @@ function Homepage() {
 								damping: 25,
 							}}
 							className="mt-4 text-gray-800">
-							<Link to={"/login"}>Caretaker Login</Link>
+							<Link to={"/login"}>Admin Login</Link>
 						</motion.p>
 					</div>
 				</div>

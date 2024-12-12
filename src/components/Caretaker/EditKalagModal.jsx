@@ -1,5 +1,4 @@
-import * as React from "react";import { useState, useEffect, useRef } from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";import ModalDialog from "@mui/joy/ModalDialog";import DialogTitle from "@mui/joy/DialogTitle";import DialogContent from "@mui/joy/DialogContent";
-import Stack from "@mui/joy/Stack";
+import * as React from "react";import { useState, useEffect, useRef } from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";import ModalDialog from "@mui/joy/ModalDialog";import DialogTitle from "@mui/joy/DialogTitle";import DialogContent from "@mui/joy/DialogContent";import Stack from "@mui/joy/Stack";
 import { TextField, CircularProgress, Select, MenuItem } from "@mui/material";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import CancelTwoToneIcon from "@mui/icons-material/CancelTwoTone";
@@ -135,7 +134,7 @@ export default function EditKalagModal({ modalIsOpen, handleClose, section, kala
 								size="small"
 								value={address}
 								onChange={(e) => setAddress(e.target.value)}
-								sx={{ margin: "10px auto" }}
+								sx={{ margin: "10px auto", display: "none" }}
 							/>
 							<TextField
 								type="number"

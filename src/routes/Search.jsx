@@ -1,9 +1,6 @@
-import { useState, useEffect } from "react";import { motion } from "framer-motion";import { Link } from "react-router-dom";import api from "../assets/api";import searchBg from "../assets/searchMenteryo.svg";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import center from "../assets/img/center.jpg";
+import { useState, useEffect } from "react";import { motion } from "framer-motion";import { Link } from "react-router-dom";import api from "../assets/api";import searchBg from "../assets/searchMenteryo.svg";import ArrowBackIcon from "@mui/icons-material/ArrowBack";import center from "../assets/img/center.jpg";
 import lower from "../assets/img/lower.jpg";
 import upper from "../assets/img/upper.jpg";
-
 function Search() {
 	const [kalagList, setKalagList] = useState([]); // Store all Kalag data
 	const [filteredKalag, setFilteredKalag] = useState([]); // Store filtered results
@@ -38,13 +35,13 @@ function Search() {
 	const imageSource = () => {
 		switch (activeSection) {
 			case "Upper Portion":
-				return upper;
-			case "Lower Portion":
 				return lower;
+			case "Lower Portion":
+				return upper;
 			case "Center Portion":
 				return center;
 			default:
-				return searchBg; // Fallback to searchBg for default case
+				return null; // Fallback to searchBg for default case
 		}
 	};
 
@@ -68,11 +65,13 @@ function Search() {
 			{/* Image Source Container with Scroll */}
 			<div className="w-screen h-screen overflow-x-scroll">
 				<div className="relative h-[540px] w-[775px] overflow-y-auto">
-					<img
-						src={imageSource()}
-						alt="Map Display"
-						className="w-full h-full mx-auto pb-24"
-					/>
+					{imageSource() && (
+						<img
+							src={imageSource()}
+							alt=""
+							className="w-full h-full mx-auto pb-24"
+						/>
+					)}
 				</div>
 			</div>
 
@@ -154,8 +153,13 @@ function Search() {
 								<div className="text-xs flex gap-1">
 									<p>Date Born: {kalag.date_born}</p> -<p>Date Died: {kalag.date_died}</p>
 								</div>
-								<div className="text-sm font-semibold flex gap-1">
+								<div className="text-sm font-semibold flex gap-1 items-center justify-between">
 									<p>Cemetery Section: {kalag.cemetery_section}</p>
+									<Link
+										to={`/memories/${kalag.id}`}
+										className="text-xs text-blue-600">
+										View More
+									</Link>
 								</div>
 							</div>
 						))

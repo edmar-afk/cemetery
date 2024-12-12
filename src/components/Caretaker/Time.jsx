@@ -3,9 +3,21 @@ import morning from "../../assets/img/morning.png";
 import evening from "../../assets/img/evening.png";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Link } from "react-router-dom";
+
 function Time() {
 	const currentHour = new Date().getHours();
-	const isMorning = currentHour >= 6 && currentHour < 18; // Morning is between 6 AM and 6 PM
+	let greeting = "";
+	let imageSrc = morning; // Default to morning image for all periods
+
+	// Determine greeting based on time of day
+	if (currentHour >= 0 && currentHour < 12) {
+		greeting = "Good Morning";
+	} else if (currentHour >= 12 && currentHour < 17) {
+		greeting = "Good Afternoon";
+	} else {
+		greeting = "Good Night";
+		imageSrc = evening; // Change image for night
+	}
 
 	return (
 		<>
@@ -19,7 +31,7 @@ function Time() {
 					initial={{ x: "-100vw" }}
 					animate={{ x: 0 }}
 					transition={{ type: "spring", stiffness: 50 }}
-					src={isMorning ? morning : evening}
+					src={imageSrc}
 					className="absolute -top-16 -left-40"
 					alt=""
 				/>
@@ -29,7 +41,7 @@ function Time() {
 						animate={{ scale: 1 }}
 						transition={{ type: "spring", stiffness: 150, bounce: 0.5 }}
 						className="text-center text-3xl text-white font-bold pt-14">
-						{isMorning ? "Good Morning" : "Good Evening"}
+						{greeting}
 					</motion.p>
 				</div>
 			</div>

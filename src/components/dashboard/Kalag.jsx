@@ -62,7 +62,7 @@ function Kalag({ cemetery_section, isAdmin, setKalagCount }) {
 
 	return (
 		<>
-			<div className="text-gray-800 h-full overflow-y-scroll">
+			<div className="text-gray-800 h-full overflow-y-scroll z-50">
 				<div className="relative flex flex-col text-gray-700 rounded-xl bg-clip-border">
 					<nav className="flex flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
 						<div className="flex justify-end items-center text-xs mr-4 py-3 cursor-pointer">

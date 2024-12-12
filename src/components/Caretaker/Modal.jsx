@@ -1,4 +1,8 @@
-import * as React from "react";import { useState } from "react";import Button from "@mui/joy/Button";import Modal from "@mui/joy/Modal";import ModalDialog from "@mui/joy/ModalDialog";
+import * as React from "react";
+import { useState } from "react";
+import Button from "@mui/joy/Button";
+import Modal from "@mui/joy/Modal";
+import ModalDialog from "@mui/joy/ModalDialog";
 import DialogTitle from "@mui/joy/DialogTitle";
 import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
@@ -12,7 +16,7 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 	const [name, setName] = useState("");
 	const [dateBorn, setDateBorn] = useState("");
 	const [dateDied, setDateDied] = useState("");
-	const [address, setAddress] = useState("");
+	const [address, setAddress] = useState("Margosatubig");
 	const [graveNumber, setGraveNumber] = useState(0);
 	const [relativeName, setRelativeName] = useState("");
 	const [relativeNumber, setRelativeNumber] = useState("");
@@ -102,8 +106,9 @@ export default function BasicModalDialog({ modalIsOpen, handleClose, section }) 
 								size="small"
 								value={address}
 								onChange={(e) => setAddress(e.target.value)}
-								sx={{ margin: "10px auto" }}
+								sx={{ margin: "10px auto", display: "none" }}
 							/>
+
 							<TextField
 								type="number"
 								id="graveNumber"
